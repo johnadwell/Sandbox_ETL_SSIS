@@ -1,0 +1,1267 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="3/23/2021 11:41:51 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="FL-HQ-MFS01"
+  DTS:CreatorName="WISHFARMS\jgranat"
+  DTS:DTSID="{65C4030B-83A9-4BE6-B3B2-E2D9C5F57672}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.123"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="0"
+  DTS:VersionBuild="228"
+  DTS:VersionGUID="{5B44E315-4B4B-4B58-8859-1AB47DA86545}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="3"
+      DTS:DTSID="{254E917E-AC06-4933-9DBA-C763E590EAAA}"
+      DTS:ObjectName="prmParentJobLogId">
+      <DTS:Property
+        DTS:DataType="3"
+        DTS:Name="ParameterValue">-3</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="7"
+      DTS:DTSID="{5653C03B-3088-4904-A607-BDAAD3C82AF9}"
+      DTS:ObjectName="prmParentPackageStart">
+      <DTS:Property
+        DTS:DataType="7"
+        DTS:Name="ParameterValue">3/23/2021 3:17:00 PM</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{08E43D87-6391-45CE-8733-60A0BD2A6B21}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="bintKeyValue">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{83A5F5FA-F3F2-4494-98D9-761657830893}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="dtDateValue">
+      <DTS:VariableValue
+        DTS:DataType="7">3/23/2021 2:30:23 PM</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{93D7327B-CA2F-43FA-97E7-CD5583042609}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="intETLLogUID">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C49611E1-714A-4846-AE9F-A4DD27D4B3CA}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="intJobLogId">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{80ED0F67-48B7-4593-8F4E-3230D89A48BC}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[$Package::prmParentJobLogId]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="intParentJobLogId">
+      <DTS:VariableValue
+        DTS:DataType="3">-3</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{1BAC9363-AF48-4AFE-A680-4E1C1FCDFFD7}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;SELECT APPOHDRIDX,ACCESSGROUPIDX,POTYPE,APPONO,PODATETIME,VENDNAMEIDX,CONTACT,CURRENCYIDX,SALETERMSIDX,APPAYTERMSIDX,COLOCATIONSEQ,SALESPERSONNAMEIDX,CARRIERNAMEIDX,DELIVERYDATE,RECEIVEFLAG,POAMT,STUBDESCR,ORIGINALDELIVERYDATE,PODATETIME AddDate,PODATETIME EditDate&#xA;FROM AP_PO_HEADER h &#xA;INNER JOIN (SELECT hd.APPOHDRIDX, MAX(d.TIMESTAMP) as maxTimeStamp&#xA;                FROM COMPANY_1.AP_PO_HEADER hd&#xA;                    INNER JOIN COMPANY_1.AP_PO_DETAIL d&#xA;                        ON hd.APPOHDRIDX = d.APPOHDRIDX&#xA;                GROUP BY hd.APPOHDRIDX) maxTimeStamp&#xA;        ON h.APPOHDRIDX = maxTimeStamp.APPOHDRIDX&#xA;WHERE PODATETIME &gt;= TO_DATE('11/01/2018','MM/DD/YYYY')&#xA;AND maxTimeStamp.maxTimeStamp &gt;= TO_DATE('&quot; + (dt_str,30,1252) @[User::dtDateValue] + &quot;', 'mm/dd/yyyy HH:MI:SS PM')&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="strFamousSourceQuery">
+      <DTS:VariableValue
+        DTS:DataType="8">SELECT APPOHDRIDX,ACCESSGROUPIDX,POTYPE,APPONO,PODATETIME,VENDNAMEIDX,CONTACT,CURRENCYIDX,SALETERMSIDX,APPAYTERMSIDX,COLOCATIONSEQ,SALESPERSONNAMEIDX,CARRIERNAMEIDX,DELIVERYDATE,RECEIVEFLAG,POAMT,STUBDESCR,ORIGINALDELIVERYDATE,PODATETIME AddDate,PODATETIME EditDate
+FROM AP_PO_HEADER h 
+INNER JOIN (SELECT hd.APPOHDRIDX, MAX(d.TIMESTAMP) as maxTimeStamp
+                FROM COMPANY_1.AP_PO_HEADER hd
+                    INNER JOIN COMPANY_1.AP_PO_DETAIL d
+                        ON hd.APPOHDRIDX = d.APPOHDRIDX
+                GROUP BY hd.APPOHDRIDX) maxTimeStamp
+        ON h.APPOHDRIDX = maxTimeStamp.APPOHDRIDX
+WHERE PODATETIME &gt;= TO_DATE('11/01/2018','MM/DD/YYYY')
+AND maxTimeStamp.maxTimeStamp &gt;= TO_DATE('3/23/2021 2:30:23 PM', 'mm/dd/yyyy HH:MI:SS PM')</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{FAE3A33A-D8CE-4E32-A82B-8B133A000CC7}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="strProcessName">
+      <DTS:VariableValue
+        DTS:DataType="8">Sandbox_ETL</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{ABB15CC9-5180-4F08-98CC-C93FDFA02FEE}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="strSubProcessName">
+      <DTS:VariableValue
+        DTS:DataType="8">Sandbox_ETL_Famous_FC_TROUBLE_REASON_Load</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{38465A43-B6AD-4510-808B-F609145306C4}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DFT - Load stage Famous_FC_TROUBLE_REASON"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          autoAdjustBufferSize="true"
+          version="1">
+          <components>
+            <component
+              refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Consumes data from SQL Server, OLE DB, ODBC, or Oracle, using the corresponding .NET Framework data provider. Use a Transact-SQL statement to define the result set. For example, extract data from SQL Server with the .NET Framework data provider for SQL Server.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="Consumes data from SQL Server, OLE DB, ODBC, or Oracle, using the corresponding .NET Framework data provider. Use a Transact-SQL statement to define the result set. For example, extract data from SQL Server with the .NET Framework data provider for SQL Server."
+              name="ADO NET Famous Source"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement used by the component to extract data."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT FCREASONIDX,NAME,REPACKFLAG,INVENTORYFLAG,NULL AddADFExecutionLogId,NULL EditADFExecutionLogId,sysdate AddDate,sysdate EditDate
+		FROM FC_TROUBLE_REASON fc</property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether to allow non-string external columns to be implicitly converted to strings at the output columns."
+                  name="AllowImplicitStringConversion">true</property>
+                <property
+                  dataType="System.String"
+                  description="The Source database table name."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the mode to retrieve external column information"
+                  name="AccessMode"
+                  typeConverter="Microsoft.SqlServer.Dts.Pipeline.DataReaderSourceAdapter+EnumToStringConverter">2</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.DataReaderSourceAdapter</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Connections[IDbConnection]"
+                  connectionManagerID="{BEE3AF78-6877-4C34-8706-F9FD93C5E78E}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[ADONET.FAMOUS]"
+                  description="Managed connection manager"
+                  name="IDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Output]"
+                  name="ADO NET Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[FCREASONIDX]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[FCREASONIDX]"
+                      lineageId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[FCREASONIDX]"
+                      name="FCREASONIDX"
+                      precision="5"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[NAME]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[NAME]"
+                      length="20"
+                      lineageId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[NAME]"
+                      name="NAME"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[REPACKFLAG]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[REPACKFLAG]"
+                      length="1"
+                      lineageId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[REPACKFLAG]"
+                      name="REPACKFLAG"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[INVENTORYFLAG]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[INVENTORYFLAG]"
+                      length="1"
+                      lineageId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[INVENTORYFLAG]"
+                      name="INVENTORYFLAG"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[ADDADFEXECUTIONLOGID]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[ADDADFEXECUTIONLOGID]"
+                      lineageId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[ADDADFEXECUTIONLOGID]"
+                      name="ADDADFEXECUTIONLOGID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[EDITADFEXECUTIONLOGID]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[EDITADFEXECUTIONLOGID]"
+                      lineageId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[EDITADFEXECUTIONLOGID]"
+                      name="EDITADFEXECUTIONLOGID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[ADDDATE]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[ADDDATE]"
+                      lineageId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[ADDDATE]"
+                      name="ADDDATE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[EDITDATE]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[EDITDATE]"
+                      lineageId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[EDITDATE]"
+                      name="EDITDATE"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[FCREASONIDX]"
+                      dataType="numeric"
+                      name="FCREASONIDX"
+                      precision="5" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[NAME]"
+                      dataType="wstr"
+                      length="20"
+                      name="NAME" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[REPACKFLAG]"
+                      dataType="wstr"
+                      length="1"
+                      name="REPACKFLAG" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[INVENTORYFLAG]"
+                      dataType="wstr"
+                      length="1"
+                      name="INVENTORYFLAG" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[ADDADFEXECUTIONLOGID]"
+                      dataType="nText"
+                      name="ADDADFEXECUTIONLOGID" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[EDITADFEXECUTIONLOGID]"
+                      dataType="nText"
+                      name="EDITADFEXECUTIONLOGID" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[ADDDATE]"
+                      dataType="dbTimeStamp"
+                      name="ADDDATE" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[EDITDATE]"
+                      dataType="dbTimeStamp"
+                      name="EDITDATE" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Error Output]"
+                  isErrorOut="true"
+                  name="ADO NET Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[FCREASONIDX]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[FCREASONIDX]"
+                      name="FCREASONIDX"
+                      precision="5" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[NAME]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[NAME]"
+                      name="NAME" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[REPACKFLAG]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[REPACKFLAG]"
+                      name="REPACKFLAG" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[INVENTORYFLAG]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[INVENTORYFLAG]"
+                      name="INVENTORYFLAG" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[ADDADFEXECUTIONLOGID]"
+                      dataType="nText"
+                      lineageId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[ADDADFEXECUTIONLOGID]"
+                      name="ADDADFEXECUTIONLOGID" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[EDITADFEXECUTIONLOGID]"
+                      dataType="nText"
+                      lineageId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[EDITADFEXECUTIONLOGID]"
+                      name="EDITADFEXECUTIONLOGID" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[ADDDATE]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[ADDDATE]"
+                      name="ADDDATE" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[EDITDATE]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[EDITDATE]"
+                      name="EDITDATE" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\DC - AddADFE"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="DC - AddADFE"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\DC - AddADFE.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\DC - AddADFE.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\DC - AddADFE.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\DC - AddADFE.Outputs[Derived Column Output].Columns[AddADFExecutionLogId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\DC - AddADFE.Outputs[Derived Column Output].Columns[AddADFExecutionLogId]"
+                      name="AddADFExecutionLogId"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">@[User::intJobLogId]</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">@[User::intJobLogId]</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\DC - AddADFE.Outputs[Derived Column Output].Columns[EditADFExecutionLogId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\DC - AddADFE.Outputs[Derived Column Output].Columns[EditADFExecutionLogId]"
+                      name="EditADFExecutionLogId"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">@[User::intJobLogId]</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">@[User::intJobLogId]</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\DC - AddADFE.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\DC - AddADFE.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\DC - AddADFE.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\DC - AddADFE.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\DC - AddADFE.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\DC - AddADFE.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\DCNV - Change from WSTR to STR"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="DCNV - Change from WSTR to STR"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\DCNV - Change from WSTR to STR.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\DCNV - Change from WSTR to STR.Inputs[Data Conversion Input].Columns[NAME]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="NAME"
+                      lineageId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[NAME]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\DCNV - Change from WSTR to STR.Inputs[Data Conversion Input].Columns[REPACKFLAG]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="REPACKFLAG"
+                      lineageId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[REPACKFLAG]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\DCNV - Change from WSTR to STR.Inputs[Data Conversion Input].Columns[INVENTORYFLAG]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="INVENTORYFLAG"
+                      lineageId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[INVENTORYFLAG]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\DCNV - Change from WSTR to STR.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\DCNV - Change from WSTR to STR.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\DCNV - Change from WSTR to STR.Outputs[Data Conversion Output].Columns[Copy of NAME]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="20"
+                      lineageId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\DCNV - Change from WSTR to STR.Outputs[Data Conversion Output].Columns[Copy of NAME]"
+                      name="Copy of NAME"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[NAME]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\DCNV - Change from WSTR to STR.Outputs[Data Conversion Output].Columns[Copy of REPACKFLAG]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="1"
+                      lineageId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\DCNV - Change from WSTR to STR.Outputs[Data Conversion Output].Columns[Copy of REPACKFLAG]"
+                      name="Copy of REPACKFLAG"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[REPACKFLAG]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\DCNV - Change from WSTR to STR.Outputs[Data Conversion Output].Columns[Copy of INVENTORYFLAG]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="1"
+                      lineageId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\DCNV - Change from WSTR to STR.Outputs[Data Conversion Output].Columns[Copy of INVENTORYFLAG]"
+                      name="Copy of INVENTORYFLAG"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[INVENTORYFLAG]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\DCNV - Change from WSTR to STR.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\DCNV - Change from WSTR to STR.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\DCNV - Change from WSTR to STR.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\DCNV - Change from WSTR to STR.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\DCNV - Change from WSTR to STR.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\DCNV - Change from WSTR to STR.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\OLEDB_DEST - Stage Famous_FC_TROUBLE_REASON"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLEDB_DEST - Stage Famous_FC_TROUBLE_REASON"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[famous].[FC_TROUBLE_REASON]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\OLEDB_DEST - Stage Famous_FC_TROUBLE_REASON.Connections[OleDbConnection]"
+                  connectionManagerID="{69FEDE81-C446-4BDC-8F7F-9670CBA903A2}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[FL-HQ-SQLDB01 Sandbox]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\OLEDB_DEST - Stage Famous_FC_TROUBLE_REASON.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\OLEDB_DEST - Stage Famous_FC_TROUBLE_REASON.Inputs[OLE DB Destination Input].Columns[ADDDATE]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ADDDATE"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\OLEDB_DEST - Stage Famous_FC_TROUBLE_REASON.Inputs[OLE DB Destination Input].ExternalColumns[AddDate]"
+                      lineageId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[ADDDATE]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\OLEDB_DEST - Stage Famous_FC_TROUBLE_REASON.Inputs[OLE DB Destination Input].Columns[EDITDATE]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="EDITDATE"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\OLEDB_DEST - Stage Famous_FC_TROUBLE_REASON.Inputs[OLE DB Destination Input].ExternalColumns[EditDate]"
+                      lineageId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[EDITDATE]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\OLEDB_DEST - Stage Famous_FC_TROUBLE_REASON.Inputs[OLE DB Destination Input].Columns[FCREASONIDX]"
+                      cachedDataType="numeric"
+                      cachedName="FCREASONIDX"
+                      cachedPrecision="5"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\OLEDB_DEST - Stage Famous_FC_TROUBLE_REASON.Inputs[OLE DB Destination Input].ExternalColumns[FCREASONIDX]"
+                      lineageId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[FCREASONIDX]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\OLEDB_DEST - Stage Famous_FC_TROUBLE_REASON.Inputs[OLE DB Destination Input].Columns[Copy of NAME]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="Copy of NAME"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\OLEDB_DEST - Stage Famous_FC_TROUBLE_REASON.Inputs[OLE DB Destination Input].ExternalColumns[NAME]"
+                      lineageId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\DCNV - Change from WSTR to STR.Outputs[Data Conversion Output].Columns[Copy of NAME]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\OLEDB_DEST - Stage Famous_FC_TROUBLE_REASON.Inputs[OLE DB Destination Input].Columns[Copy of REPACKFLAG]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Copy of REPACKFLAG"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\OLEDB_DEST - Stage Famous_FC_TROUBLE_REASON.Inputs[OLE DB Destination Input].ExternalColumns[REPACKFLAG]"
+                      lineageId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\DCNV - Change from WSTR to STR.Outputs[Data Conversion Output].Columns[Copy of REPACKFLAG]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\OLEDB_DEST - Stage Famous_FC_TROUBLE_REASON.Inputs[OLE DB Destination Input].Columns[Copy of INVENTORYFLAG]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Copy of INVENTORYFLAG"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\OLEDB_DEST - Stage Famous_FC_TROUBLE_REASON.Inputs[OLE DB Destination Input].ExternalColumns[INVENTORYFLAG]"
+                      lineageId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\DCNV - Change from WSTR to STR.Outputs[Data Conversion Output].Columns[Copy of INVENTORYFLAG]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\OLEDB_DEST - Stage Famous_FC_TROUBLE_REASON.Inputs[OLE DB Destination Input].ExternalColumns[AddDate]"
+                      dataType="dbTimeStamp"
+                      name="AddDate" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\OLEDB_DEST - Stage Famous_FC_TROUBLE_REASON.Inputs[OLE DB Destination Input].ExternalColumns[EditDate]"
+                      dataType="dbTimeStamp"
+                      name="EditDate" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\OLEDB_DEST - Stage Famous_FC_TROUBLE_REASON.Inputs[OLE DB Destination Input].ExternalColumns[AddADFExecutionLogId]"
+                      dataType="i4"
+                      name="AddADFExecutionLogId" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\OLEDB_DEST - Stage Famous_FC_TROUBLE_REASON.Inputs[OLE DB Destination Input].ExternalColumns[EditADFExecutionLogId]"
+                      dataType="i4"
+                      name="EditADFExecutionLogId" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\OLEDB_DEST - Stage Famous_FC_TROUBLE_REASON.Inputs[OLE DB Destination Input].ExternalColumns[FCREASONIDX]"
+                      dataType="numeric"
+                      name="FCREASONIDX"
+                      precision="5" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\OLEDB_DEST - Stage Famous_FC_TROUBLE_REASON.Inputs[OLE DB Destination Input].ExternalColumns[NAME]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="NAME" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\OLEDB_DEST - Stage Famous_FC_TROUBLE_REASON.Inputs[OLE DB Destination Input].ExternalColumns[REPACKFLAG]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="REPACKFLAG" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\OLEDB_DEST - Stage Famous_FC_TROUBLE_REASON.Inputs[OLE DB Destination Input].ExternalColumns[INVENTORYFLAG]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="INVENTORYFLAG" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\OLEDB_DEST - Stage Famous_FC_TROUBLE_REASON.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\OLEDB_DEST - Stage Famous_FC_TROUBLE_REASON.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\OLEDB_DEST - Stage Famous_FC_TROUBLE_REASON.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\OLEDB_DEST - Stage Famous_FC_TROUBLE_REASON.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\OLEDB_DEST - Stage Famous_FC_TROUBLE_REASON.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\OLEDB_DEST - Stage Famous_FC_TROUBLE_REASON.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON.Paths[ADO NET Source Output]"
+              endId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\DC - AddADFE.Inputs[Derived Column Input]"
+              name="ADO NET Source Output"
+              startId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source.Outputs[ADO NET Source Output]" />
+            <path
+              refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON.Paths[Data Conversion Output]"
+              endId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\OLEDB_DEST - Stage Famous_FC_TROUBLE_REASON.Inputs[OLE DB Destination Input]"
+              name="Data Conversion Output"
+              startId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\DCNV - Change from WSTR to STR.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON.Paths[Derived Column Output]"
+              endId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\DCNV - Change from WSTR to STR.Inputs[Data Conversion Input]"
+              name="Derived Column Output"
+              startId="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\DC - AddADFE.Outputs[Derived Column Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\EXEC - usp_famous_FC_TROUBLE_REASON_Load"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{7DDA3C3B-45EA-48E2-9564-D5D89E0DB144}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="EXEC - usp_famous_FC_TROUBLE_REASON_Load"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{69FEDE81-C446-4BDC-8F7F-9670CBA903A2}"
+          SQLTask:SqlStatementSource="EXEC stage.usp_famous_AP_PO_HEADER_Load @JobLogId = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::intJobLogId"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SEQ - Prep Actions"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{B2047B2D-7EA7-4E9E-B271-8F46487D37D2}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SEQ - Prep Actions">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\SEQ - Prep Actions\EXEC - Get ETLLogUID"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{9BD5593D-6E99-43BB-9DFF-21349F74EF3D}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="EXEC - Get ETLLogUID"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{3F154544-4BAC-4F55-9FF6-3A5F9A104221}"
+              SQLTask:SqlStatementSource="EXEC dbo.usp_ETLLog_Get @ProcessName = ?, @SubProcessName = ?"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="ETLLogUID"
+                SQLTask:DtsVariableName="User::intETLLogUID" />
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="KeyValue"
+                SQLTask:DtsVariableName="User::bintKeyValue" />
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="DateValue"
+                SQLTask:DtsVariableName="User::dtDateValue" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::strProcessName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="100" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="User::strSubProcessName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="100" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\SEQ - Prep Actions\EXEC - Get JobLogId"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{55D1695F-F410-4818-AB72-2CFAE7EE438D}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="EXEC - Get JobLogId"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{3F154544-4BAC-4F55-9FF6-3A5F9A104221}"
+              SQLTask:SqlStatementSource="EXEC dbo.usp_JobLog_Insert @ProcessName = ?, @ProcessType = 'SSIS', @ParentJobLogId = ?"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="JobLogId"
+                SQLTask:DtsVariableName="User::intJobLogId" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::strSubProcessName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="100" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="User::intParentJobLogId"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\SEQ - Prep Actions\EXEC - Truncate stage Famous FC_TROUBLE_REASON"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{8CF549C3-74BC-40D9-8485-1AD0B3C4EF04}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="EXEC - Truncate stage Famous FC_TROUBLE_REASON"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="2">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{69FEDE81-C446-4BDC-8F7F-9670CBA903A2}"
+              SQLTask:SqlStatementSource="TRUNCATE TABLE stage.FC_TROUBLE_REASON" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SEQ - Update Execution log Ids"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{AAC14B23-4519-456D-8C1A-F13E46E07272}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SEQ - Update Execution log Ids">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\SEQ - Update Execution log Ids\EXEC - usp_ETLLog_Update"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{19A2E0DD-C9AB-4D2A-A4BC-2B5DEE59CD6F}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="EXEC - usp_ETLLog_Update"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{3F154544-4BAC-4F55-9FF6-3A5F9A104221}"
+              SQLTask:SqlStatementSource="EXEC dbo.usp_ETLLog_Update @ETLLogUID = ?, @DateValue = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::intETLLogUID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="100" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="$Package::prmParentPackageStart"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="7"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\SEQ - Update Execution log Ids\EXEC - usp_JobLog_Update"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{E33DFD6B-102F-4011-98D1-29EC3540D9DF}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="EXEC - usp_JobLog_Update"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{3F154544-4BAC-4F55-9FF6-3A5F9A104221}"
+              SQLTask:SqlStatementSource="EXEC dbo.usp_JobLog_Update @JobLogId = ?, @ProcessedStatusId = 1" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::intJobLogId"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="100" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{3A1D3332-2078-4313-92EB-06589B7AE183}"
+      DTS:From="Package\EXEC - usp_famous_FC_TROUBLE_REASON_Load"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\SEQ - Update Execution log Ids" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{F00203FD-DB19-4895-89A4-2C752B96ADBF}"
+      DTS:From="Package\SEQ - Prep Actions"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\DFT - Load stage Famous_FC_TROUBLE_REASON" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{378CCB96-91A6-4ABB-AADC-0CF5D29E7FE1}"
+      DTS:From="Package\DFT - Load stage Famous_FC_TROUBLE_REASON"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\EXEC - usp_famous_FC_TROUBLE_REASON_Load" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="338,42"
+          Id="Package\DFT - Load stage Famous_FC_TROUBLE_REASON"
+          TopLeft="247.08333334989,202.035714309434" />
+        <NodeLayout
+          Size="340,42"
+          Id="Package\EXEC - usp_famous_FC_TROUBLE_REASON_Load"
+          TopLeft="249,313.5" />
+        <NodeLayout
+          Size="197,42"
+          Id="Package\SEQ - Prep Actions\EXEC - Get ETLLogUID"
+          TopLeft="369.5,6.49999999999989" />
+        <NodeLayout
+          Size="184,42"
+          Id="Package\SEQ - Prep Actions\EXEC - Get JobLogId"
+          TopLeft="626.58333334989,5.0357143094344" />
+        <NodeLayout
+          Size="362,42"
+          Id="Package\SEQ - Prep Actions\EXEC - Truncate stage Famous FC_TROUBLE_REASON"
+          TopLeft="5.08333334989021,4.57142861886902" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="816,103"
+          Size="816,146"
+          Id="Package\SEQ - Prep Actions"
+          TopLeft="5.50000000000006,7.5" />
+        <NodeLayout
+          Size="222,42"
+          Id="Package\SEQ - Update Execution log Ids\EXEC - usp_ETLLog_Update"
+          TopLeft="5.5,5.5" />
+        <NodeLayout
+          Size="220,42"
+          Id="Package\SEQ - Update Execution log Ids\EXEC - usp_JobLog_Update"
+          TopLeft="288.5,5.5" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="514,103"
+          Size="514,146"
+          Id="Package\SEQ - Update Execution log Ids"
+          TopLeft="154.5,445.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="415.25,355.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,90"
+              Start="0,0"
+              End="0,82.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,82.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="414.791666674945,153.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,48.535714309434"
+              Start="0,0"
+              End="0,41.035714309434">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,41.035714309434" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="417.541666674945,244.035714309434">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,69.464285690566"
+              Start="0,0"
+              End="0,61.964285690566">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,61.964285690566" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\DFT - Load stage Famous_FC_TROUBLE_REASON">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="255,42"
+          Id="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\DCNV - Change from WSTR to STR"
+          TopLeft="150,218" />
+        <NodeLayout
+          Size="208,42"
+          Id="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source"
+          TopLeft="171,68" />
+        <NodeLayout
+          Size="364,42"
+          Id="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\OLEDB_DEST - Stage Famous_FC_TROUBLE_REASON"
+          TopLeft="90.750000049671,359.607142928304" />
+        <EdgeLayout
+          Id="Package\DFT - Load stage Famous_FC_TROUBLE_REASON.Paths[Data Conversion Output]"
+          TopLeft="275.125000024836,260">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,99.607142928304"
+              Start="0,0"
+              End="0,92.107142928304">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,92.107142928304" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="153,42"
+          Id="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\DC - AddADFE"
+          TopLeft="200,138" />
+        <EdgeLayout
+          Id="Package\DFT - Load stage Famous_FC_TROUBLE_REASON.Paths[ADO NET Source Output]"
+          TopLeft="275.75,110">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,28"
+              Start="0,0"
+              End="0,20.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT - Load stage Famous_FC_TROUBLE_REASON.Paths[Derived Column Output]"
+          TopLeft="277,180">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,38"
+              Start="0,0"
+              End="0,30.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\OLEDB_DEST - Stage Famous_FC_TROUBLE_REASON">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Load stage Famous_FC_TROUBLE_REASON\ADO NET Famous Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

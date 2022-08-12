@@ -1,0 +1,1818 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="3/23/2021 11:41:51 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="FL-HQ-MFS01"
+  DTS:CreatorName="WISHFARMS\jgranat"
+  DTS:DTSID="{DAC2CC3F-5B44-4D13-BCF4-541B241AE45E}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.123"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="0"
+  DTS:VersionBuild="253"
+  DTS:VersionGUID="{BC6A91F2-8634-46AA-A928-AB3E9B7D2589}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="3"
+      DTS:DTSID="{287122BE-73FC-4470-A0A0-78276DA6D0D0}"
+      DTS:ObjectName="prmParentJobLogId">
+      <DTS:Property
+        DTS:DataType="3"
+        DTS:Name="ParameterValue">-3</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="7"
+      DTS:DTSID="{B128ABB7-94AC-4E2C-9CFF-CFC6B26F6354}"
+      DTS:ObjectName="prmParentPackageStart">
+      <DTS:Property
+        DTS:DataType="7"
+        DTS:Name="ParameterValue">3/23/2021 3:17:00 PM</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{474B2A48-EF2D-4EC1-8693-6F1BE6115A43}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="bintKeyValue">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{0028CD16-4E42-4C5F-84AF-304D69D6F4D1}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="dtDateValue">
+      <DTS:VariableValue
+        DTS:DataType="7">3/23/2021 2:30:23 PM</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{8C50EA0D-700C-4765-A4C0-7908A252846A}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="intETLLogUID">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{31963911-8493-4B24-B2F1-BE11BA326898}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="intJobLogId">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{462CCBDB-4759-44F3-8EB0-A5F96C5A18B8}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[$Package::prmParentJobLogId]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="intParentJobLogId">
+      <DTS:VariableValue
+        DTS:DataType="3">-3</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C4D5D4BC-F08A-4110-A1A6-4D05DB1B7427}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;SELECT i.INVENTORYIDX,i.TAGIDX,i.WAREHOUSEIDX,i.PRODUCTIDX,i.GABLOCKIDX,i.GALOTIDX,i.RECEIVEDATE,i.APPOHDRIDX,i.RECVQNT,i.RECVCOST&#xA;,i.ISSUEQNT,i.ISSUECOST,i.QUALITYIDX,i.CONDITIONIDX,i.ICPRODTYPE,i.ICTRXHDRIDX,i.INVENTORYSTATUS,i.SALEAMOUNT,i.NEWINVENTORYIDX&#xA;,sysdate AddDate,sysdate EditDate &#xA;  FROM IC_INVENTORY i&#xA;    INNER JOIN IC_PRODUCT_ID prodId &#xA;        ON i.PRODUCTIDX = prodId.PRODUCTIDX&#xA;    INNER JOIN IC_TAG t&#xA;        ON i.TAGIDX = t.TAGIDX&#xA;    INNER JOIN IC_WAREHOUSE wh&#xA;        ON i.WAREHOUSEIDX = wh.WAREHOUSEIDX&#xA;    INNER JOIN FC_NAME_LOCATION l&#xA;        ON wh.NAMELOCATIONSEQ = l.NAMELOCATIONSEQ&#xA;            AND wh.NAMEIDX = l.NAMEIDX&#xA;    /* FOR GROWER RECEIVED PRODUCT, DRIVE FROM THE BLOCK */&#xA;    LEFT OUTER JOIN GA_BLOCK blk&#xA;        ON i.GABLOCKIDX = blk.GABLOCKIDX&#xA;    LEFT OUTER JOIN FC_NAME gname&#xA;        ON gname.NAMEIDX = blk.GROWERNAMEIDX&#xA;    /* FOR PRODUCT FROM A PO, DRIVE FROM THE PO HEADER */&#xA;    LEFT OUTER JOIN AP_PO_HEADER appoh&#xA;        ON appoh.APPOHDRIDX = i.APPOHDRIDX&#xA;    LEFT OUTER JOIN FC_NAME pogname&#xA;        ON pogname.NAMEIDX = appoh.VENDNAMEIDX&#xA;    LEFT OUTER JOIN GA_LOT lot&#xA;        ON i.GALOTIDX = lot.GALOTIDX&#xA;    LEFT OUTER JOIN IC_PRODUCT_PRODUCE prodProduce&#xA;        ON prodId.PRODUCTIDX = prodProduce.PRODUCTIDX&#xA;    LEFT OUTER JOIN IC_PS_COMMODITY comm        -- added 10/13/2020 ja&#xA;        ON prodProduce.CMTYIDX = comm.CMTYIDX   -- added 10/13/2020 ja&#xA;    LEFT OUTER JOIN IC_PRODUCT prod&#xA;        ON prodId.PRODUCTIDX = prod.PRODUCTIDX&#xA;    LEFT OUTER JOIN IC_PS_QUALITY q&#xA;        ON i.QUALITYIDX = q.QUALITYIDX&#xA;    LEFT OUTER JOIN IC_PS_CONDITION c&#xA;        ON i.CONDITIONIDX = c.CONDITIONIDX&#xA;    LEFT OUTER JOIN IC_PS_SIZE sz               -- added 06/22/2022 ja&#xA;        ON prodProduce.SIZEIDX = sz.SIZEIDX     -- added 06/22/2022 ja&#xA;    LEFT OUTER JOIN IC_TRX_HEADER h&#xA;        ON i.ICTRXHDRIDX = h.ICTRXHDRIDX&#xA;    LEFT OUTER JOIN AR_TRX_HEADER arh&#xA;        ON h.ARTRXHDRIDX = arh.ARTRXHDRIDX&#xA;    INNER JOIN (SELECT hd.ICTRXHDRIDX, MAX(d.TIMESTAMP) as maxTimeStamp&#xA;                FROM COMPANY_1.IC_TRX_HEADER hd&#xA;                    INNER JOIN COMPANY_1.IC_TRX_DETAIL d&#xA;                        ON hd.ICTRXHDRIDX = d.ICTRXHDRIDX&#xA;                GROUP BY hd.ICTRXHDRIDX) maxTimeStamp&#xA;        ON h.ICTRXHDRIDX = maxTimeStamp.ICTRXHDRIDX&#xA; WHERE i.RECEIVEDATE &gt;= TO_DATE('11/01/2018','MM/DD/YYYY')&#xA;    AND (UPPER(prodId.NAME) LIKE '%STRAW%'&#xA;        OR UPPER(prodId.NAME) LIKE '%BLUE%'&#xA;&#x9;&#x9;OR UPPER(prodId.NAME) LIKE '%BLACK%'&#xA;&#x9;&#x9;OR UPPER(prodId.NAME) LIKE '%PINE%'&#xA;&#x9;&#x9;OR UPPER(prodId.NAME) LIKE '%RASP%')&#xA;    AND i.NEWINVENTORYIDX IS NULL    &#xA;    AND i.RECVQNT &gt; 0&#xA;AND maxTimeStamp.maxTimeStamp &gt;= TO_DATE('&quot; + (dt_str,30,1252) @[User::dtDateValue] + &quot;', 'mm/dd/yyyy HH:MI:SS PM')&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="strFamousSourceQuery">
+      <DTS:VariableValue
+        DTS:DataType="8">SELECT i.INVENTORYIDX,i.TAGIDX,i.WAREHOUSEIDX,i.PRODUCTIDX,i.GABLOCKIDX,i.GALOTIDX,i.RECEIVEDATE,i.APPOHDRIDX,i.RECVQNT,i.RECVCOST
+,i.ISSUEQNT,i.ISSUECOST,i.QUALITYIDX,i.CONDITIONIDX,i.ICPRODTYPE,i.ICTRXHDRIDX,i.INVENTORYSTATUS,i.SALEAMOUNT,i.NEWINVENTORYIDX
+,sysdate AddDate,sysdate EditDate 
+  FROM IC_INVENTORY i
+    INNER JOIN IC_PRODUCT_ID prodId 
+        ON i.PRODUCTIDX = prodId.PRODUCTIDX
+    INNER JOIN IC_TAG t
+        ON i.TAGIDX = t.TAGIDX
+    INNER JOIN IC_WAREHOUSE wh
+        ON i.WAREHOUSEIDX = wh.WAREHOUSEIDX
+    INNER JOIN FC_NAME_LOCATION l
+        ON wh.NAMELOCATIONSEQ = l.NAMELOCATIONSEQ
+            AND wh.NAMEIDX = l.NAMEIDX
+    /* FOR GROWER RECEIVED PRODUCT, DRIVE FROM THE BLOCK */
+    LEFT OUTER JOIN GA_BLOCK blk
+        ON i.GABLOCKIDX = blk.GABLOCKIDX
+    LEFT OUTER JOIN FC_NAME gname
+        ON gname.NAMEIDX = blk.GROWERNAMEIDX
+    /* FOR PRODUCT FROM A PO, DRIVE FROM THE PO HEADER */
+    LEFT OUTER JOIN AP_PO_HEADER appoh
+        ON appoh.APPOHDRIDX = i.APPOHDRIDX
+    LEFT OUTER JOIN FC_NAME pogname
+        ON pogname.NAMEIDX = appoh.VENDNAMEIDX
+    LEFT OUTER JOIN GA_LOT lot
+        ON i.GALOTIDX = lot.GALOTIDX
+    LEFT OUTER JOIN IC_PRODUCT_PRODUCE prodProduce
+        ON prodId.PRODUCTIDX = prodProduce.PRODUCTIDX
+    LEFT OUTER JOIN IC_PS_COMMODITY comm        -- added 10/13/2020 ja
+        ON prodProduce.CMTYIDX = comm.CMTYIDX   -- added 10/13/2020 ja
+    LEFT OUTER JOIN IC_PRODUCT prod
+        ON prodId.PRODUCTIDX = prod.PRODUCTIDX
+    LEFT OUTER JOIN IC_PS_QUALITY q
+        ON i.QUALITYIDX = q.QUALITYIDX
+    LEFT OUTER JOIN IC_PS_CONDITION c
+        ON i.CONDITIONIDX = c.CONDITIONIDX
+    LEFT OUTER JOIN IC_PS_SIZE sz               -- added 06/22/2022 ja
+        ON prodProduce.SIZEIDX = sz.SIZEIDX     -- added 06/22/2022 ja
+    LEFT OUTER JOIN IC_TRX_HEADER h
+        ON i.ICTRXHDRIDX = h.ICTRXHDRIDX
+    LEFT OUTER JOIN AR_TRX_HEADER arh
+        ON h.ARTRXHDRIDX = arh.ARTRXHDRIDX
+    INNER JOIN (SELECT hd.ICTRXHDRIDX, MAX(d.TIMESTAMP) as maxTimeStamp
+                FROM COMPANY_1.IC_TRX_HEADER hd
+                    INNER JOIN COMPANY_1.IC_TRX_DETAIL d
+                        ON hd.ICTRXHDRIDX = d.ICTRXHDRIDX
+                GROUP BY hd.ICTRXHDRIDX) maxTimeStamp
+        ON h.ICTRXHDRIDX = maxTimeStamp.ICTRXHDRIDX
+ WHERE i.RECEIVEDATE &gt;= TO_DATE('11/01/2018','MM/DD/YYYY')
+    AND (UPPER(prodId.NAME) LIKE '%STRAW%'
+        OR UPPER(prodId.NAME) LIKE '%BLUE%'
+		OR UPPER(prodId.NAME) LIKE '%BLACK%'
+		OR UPPER(prodId.NAME) LIKE '%PINE%'
+		OR UPPER(prodId.NAME) LIKE '%RASP%')
+    AND i.NEWINVENTORYIDX IS NULL    
+    AND i.RECVQNT &gt; 0
+AND maxTimeStamp.maxTimeStamp &gt;= TO_DATE('3/23/2021 2:30:23 PM', 'mm/dd/yyyy HH:MI:SS PM')</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{DE574749-F9EB-4A4C-91D3-7EA6C3293003}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="strProcessName">
+      <DTS:VariableValue
+        DTS:DataType="8">Sandbox_ETL</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{422FD96C-A7C9-4D2C-90DB-AE73859AB52B}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="strSubProcessName">
+      <DTS:VariableValue
+        DTS:DataType="8">Sandbox_ETL_Famous_IC_INVENTORY_Load</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\DFT - Load stage Famous_IC_INVENTORY"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{D11BA9A7-1A21-4DDD-B0C9-E91321977E48}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DFT - Load stage Famous_IC_INVENTORY"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:PropertyExpression
+        DTS:Name="[ADO NET Famous Source].[SqlCommand]">@[User::strFamousSourceQuery]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <pipeline
+          autoAdjustBufferSize="true"
+          version="1">
+          <components>
+            <component
+              refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Consumes data from SQL Server, OLE DB, ODBC, or Oracle, using the corresponding .NET Framework data provider. Use a Transact-SQL statement to define the result set. For example, extract data from SQL Server with the .NET Framework data provider for SQL Server.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="Consumes data from SQL Server, OLE DB, ODBC, or Oracle, using the corresponding .NET Framework data provider. Use a Transact-SQL statement to define the result set. For example, extract data from SQL Server with the .NET Framework data provider for SQL Server."
+              name="ADO NET Famous Source"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement used by the component to extract data."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT i.INVENTORYIDX,i.TAGIDX,i.WAREHOUSEIDX,i.PRODUCTIDX,i.GABLOCKIDX,i.GALOTIDX,i.RECEIVEDATE,i.APPOHDRIDX,i.RECVQNT,i.RECVCOST
+,i.ISSUEQNT,i.ISSUECOST,i.QUALITYIDX,i.CONDITIONIDX,i.ICPRODTYPE,i.ICTRXHDRIDX,i.INVENTORYSTATUS,i.SALEAMOUNT,i.NEWINVENTORYIDX
+,sysdate AddDate,sysdate EditDate 
+  FROM IC_INVENTORY i
+    INNER JOIN IC_PRODUCT_ID prodId 
+        ON i.PRODUCTIDX = prodId.PRODUCTIDX
+    INNER JOIN IC_TAG t
+        ON i.TAGIDX = t.TAGIDX
+    INNER JOIN IC_WAREHOUSE wh
+        ON i.WAREHOUSEIDX = wh.WAREHOUSEIDX
+    INNER JOIN FC_NAME_LOCATION l
+        ON wh.NAMELOCATIONSEQ = l.NAMELOCATIONSEQ
+            AND wh.NAMEIDX = l.NAMEIDX
+    /* FOR GROWER RECEIVED PRODUCT, DRIVE FROM THE BLOCK */
+    LEFT OUTER JOIN GA_BLOCK blk
+        ON i.GABLOCKIDX = blk.GABLOCKIDX
+    LEFT OUTER JOIN FC_NAME gname
+        ON gname.NAMEIDX = blk.GROWERNAMEIDX
+    /* FOR PRODUCT FROM A PO, DRIVE FROM THE PO HEADER */
+    LEFT OUTER JOIN AP_PO_HEADER appoh
+        ON appoh.APPOHDRIDX = i.APPOHDRIDX
+    LEFT OUTER JOIN FC_NAME pogname
+        ON pogname.NAMEIDX = appoh.VENDNAMEIDX
+    LEFT OUTER JOIN GA_LOT lot
+        ON i.GALOTIDX = lot.GALOTIDX
+    LEFT OUTER JOIN IC_PRODUCT_PRODUCE prodProduce
+        ON prodId.PRODUCTIDX = prodProduce.PRODUCTIDX
+    LEFT OUTER JOIN IC_PS_COMMODITY comm        -- added 10/13/2020 ja
+        ON prodProduce.CMTYIDX = comm.CMTYIDX   -- added 10/13/2020 ja
+    LEFT OUTER JOIN IC_PRODUCT prod
+        ON prodId.PRODUCTIDX = prod.PRODUCTIDX
+    LEFT OUTER JOIN IC_PS_QUALITY q
+        ON i.QUALITYIDX = q.QUALITYIDX
+    LEFT OUTER JOIN IC_PS_CONDITION c
+        ON i.CONDITIONIDX = c.CONDITIONIDX
+    LEFT OUTER JOIN IC_PS_SIZE sz               -- added 06/22/2022 ja
+        ON prodProduce.SIZEIDX = sz.SIZEIDX     -- added 06/22/2022 ja
+    LEFT OUTER JOIN IC_TRX_HEADER h
+        ON i.ICTRXHDRIDX = h.ICTRXHDRIDX
+    LEFT OUTER JOIN AR_TRX_HEADER arh
+        ON h.ARTRXHDRIDX = arh.ARTRXHDRIDX
+    INNER JOIN (SELECT hd.ICTRXHDRIDX, MAX(d.TIMESTAMP) as maxTimeStamp
+                FROM COMPANY_1.IC_TRX_HEADER hd
+                    INNER JOIN COMPANY_1.IC_TRX_DETAIL d
+                        ON hd.ICTRXHDRIDX = d.ICTRXHDRIDX
+                GROUP BY hd.ICTRXHDRIDX) maxTimeStamp
+        ON h.ICTRXHDRIDX = maxTimeStamp.ICTRXHDRIDX
+ WHERE i.RECEIVEDATE &gt;= TO_DATE('11/01/2018','MM/DD/YYYY')
+    AND (UPPER(prodId.NAME) LIKE '%STRAW%'
+        OR UPPER(prodId.NAME) LIKE '%BLUE%'
+		OR UPPER(prodId.NAME) LIKE '%BLACK%'
+		OR UPPER(prodId.NAME) LIKE '%PINE%'
+		OR UPPER(prodId.NAME) LIKE '%RASP%')
+    AND i.NEWINVENTORYIDX IS NULL    
+    AND i.RECVQNT &gt; 0
+AND maxTimeStamp.maxTimeStamp &gt;= TO_DATE('3/23/2021 2:30:23 PM', 'mm/dd/yyyy HH:MI:SS PM')</property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether to allow non-string external columns to be implicitly converted to strings at the output columns."
+                  name="AllowImplicitStringConversion">true</property>
+                <property
+                  dataType="System.String"
+                  description="The Source database table name."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the mode to retrieve external column information"
+                  name="AccessMode"
+                  typeConverter="Microsoft.SqlServer.Dts.Pipeline.DataReaderSourceAdapter+EnumToStringConverter">2</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.DataReaderSourceAdapter</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Connections[IDbConnection]"
+                  connectionManagerID="{BEE3AF78-6877-4C34-8706-F9FD93C5E78E}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[ADONET.FAMOUS]"
+                  description="Managed connection manager"
+                  name="IDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output]"
+                  name="ADO NET Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[INVENTORYIDX]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[INVENTORYIDX]"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[INVENTORYIDX]"
+                      name="INVENTORYIDX"
+                      precision="9"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[TAGIDX]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[TAGIDX]"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[TAGIDX]"
+                      name="TAGIDX"
+                      precision="9"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[WAREHOUSEIDX]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[WAREHOUSEIDX]"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[WAREHOUSEIDX]"
+                      name="WAREHOUSEIDX"
+                      precision="5"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[PRODUCTIDX]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[PRODUCTIDX]"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[PRODUCTIDX]"
+                      name="PRODUCTIDX"
+                      precision="9"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[GABLOCKIDX]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[GABLOCKIDX]"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[GABLOCKIDX]"
+                      name="GABLOCKIDX"
+                      precision="9"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[GALOTIDX]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[GALOTIDX]"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[GALOTIDX]"
+                      name="GALOTIDX"
+                      precision="9"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[RECEIVEDATE]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[RECEIVEDATE]"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[RECEIVEDATE]"
+                      name="RECEIVEDATE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[APPOHDRIDX]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[APPOHDRIDX]"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[APPOHDRIDX]"
+                      name="APPOHDRIDX"
+                      precision="9"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[RECVQNT]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[RECVQNT]"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[RECVQNT]"
+                      name="RECVQNT"
+                      precision="38"
+                      scale="4"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[RECVCOST]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[RECVCOST]"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[RECVCOST]"
+                      name="RECVCOST"
+                      precision="11"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[ISSUEQNT]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[ISSUEQNT]"
+                      length="40"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[ISSUEQNT]"
+                      name="ISSUEQNT"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[ISSUECOST]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[ISSUECOST]"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[ISSUECOST]"
+                      name="ISSUECOST"
+                      precision="11"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[QUALITYIDX]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[QUALITYIDX]"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[QUALITYIDX]"
+                      name="QUALITYIDX"
+                      precision="5"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[CONDITIONIDX]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[CONDITIONIDX]"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[CONDITIONIDX]"
+                      name="CONDITIONIDX"
+                      precision="5"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[ICPRODTYPE]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[ICPRODTYPE]"
+                      length="1"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[ICPRODTYPE]"
+                      name="ICPRODTYPE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[ICTRXHDRIDX]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[ICTRXHDRIDX]"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[ICTRXHDRIDX]"
+                      name="ICTRXHDRIDX"
+                      precision="9"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[INVENTORYSTATUS]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[INVENTORYSTATUS]"
+                      length="1"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[INVENTORYSTATUS]"
+                      name="INVENTORYSTATUS"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[SALEAMOUNT]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[SALEAMOUNT]"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[SALEAMOUNT]"
+                      name="SALEAMOUNT"
+                      precision="11"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[NEWINVENTORYIDX]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[NEWINVENTORYIDX]"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[NEWINVENTORYIDX]"
+                      name="NEWINVENTORYIDX"
+                      precision="9"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[ADDDATE]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[ADDDATE]"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[ADDDATE]"
+                      name="ADDDATE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[EDITDATE]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[EDITDATE]"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[EDITDATE]"
+                      name="EDITDATE"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[INVENTORYIDX]"
+                      dataType="numeric"
+                      name="INVENTORYIDX"
+                      precision="9" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[TAGIDX]"
+                      dataType="numeric"
+                      name="TAGIDX"
+                      precision="9" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[WAREHOUSEIDX]"
+                      dataType="numeric"
+                      name="WAREHOUSEIDX"
+                      precision="5" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[PRODUCTIDX]"
+                      dataType="numeric"
+                      name="PRODUCTIDX"
+                      precision="9" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[GABLOCKIDX]"
+                      dataType="numeric"
+                      name="GABLOCKIDX"
+                      precision="9" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[GALOTIDX]"
+                      dataType="numeric"
+                      name="GALOTIDX"
+                      precision="9" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[RECEIVEDATE]"
+                      dataType="dbTimeStamp"
+                      name="RECEIVEDATE" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[APPOHDRIDX]"
+                      dataType="numeric"
+                      name="APPOHDRIDX"
+                      precision="9" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[RECVQNT]"
+                      dataType="numeric"
+                      name="RECVQNT"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[RECVCOST]"
+                      dataType="numeric"
+                      name="RECVCOST"
+                      precision="11"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[ISSUEQNT]"
+                      dataType="numeric"
+                      name="ISSUEQNT" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[ISSUECOST]"
+                      dataType="numeric"
+                      name="ISSUECOST"
+                      precision="11"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[QUALITYIDX]"
+                      dataType="numeric"
+                      name="QUALITYIDX"
+                      precision="5" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[CONDITIONIDX]"
+                      dataType="numeric"
+                      name="CONDITIONIDX"
+                      precision="5" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[ICPRODTYPE]"
+                      dataType="wstr"
+                      length="1"
+                      name="ICPRODTYPE" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[ICTRXHDRIDX]"
+                      dataType="numeric"
+                      name="ICTRXHDRIDX"
+                      precision="9" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[INVENTORYSTATUS]"
+                      dataType="wstr"
+                      length="1"
+                      name="INVENTORYSTATUS" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[SALEAMOUNT]"
+                      dataType="numeric"
+                      name="SALEAMOUNT"
+                      precision="11"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[NEWINVENTORYIDX]"
+                      dataType="numeric"
+                      name="NEWINVENTORYIDX"
+                      precision="9" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[ADDDATE]"
+                      dataType="dbTimeStamp"
+                      name="ADDDATE" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[EDITDATE]"
+                      dataType="dbTimeStamp"
+                      name="EDITDATE" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Error Output]"
+                  isErrorOut="true"
+                  name="ADO NET Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[INVENTORYIDX]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[INVENTORYIDX]"
+                      name="INVENTORYIDX"
+                      precision="9" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[TAGIDX]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[TAGIDX]"
+                      name="TAGIDX"
+                      precision="9" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[WAREHOUSEIDX]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[WAREHOUSEIDX]"
+                      name="WAREHOUSEIDX"
+                      precision="5" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[PRODUCTIDX]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[PRODUCTIDX]"
+                      name="PRODUCTIDX"
+                      precision="9" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[GABLOCKIDX]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[GABLOCKIDX]"
+                      name="GABLOCKIDX"
+                      precision="9" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[GALOTIDX]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[GALOTIDX]"
+                      name="GALOTIDX"
+                      precision="9" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[RECEIVEDATE]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[RECEIVEDATE]"
+                      name="RECEIVEDATE" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[APPOHDRIDX]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[APPOHDRIDX]"
+                      name="APPOHDRIDX"
+                      precision="9" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[RECVQNT]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[RECVQNT]"
+                      name="RECVQNT"
+                      precision="38"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[RECVCOST]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[RECVCOST]"
+                      name="RECVCOST"
+                      precision="11"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[ISSUEQNT]"
+                      dataType="wstr"
+                      length="40"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[ISSUEQNT]"
+                      name="ISSUEQNT" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[ISSUECOST]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[ISSUECOST]"
+                      name="ISSUECOST"
+                      precision="11"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[QUALITYIDX]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[QUALITYIDX]"
+                      name="QUALITYIDX"
+                      precision="5" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[CONDITIONIDX]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[CONDITIONIDX]"
+                      name="CONDITIONIDX"
+                      precision="5" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[ICPRODTYPE]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[ICPRODTYPE]"
+                      name="ICPRODTYPE" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[ICTRXHDRIDX]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[ICTRXHDRIDX]"
+                      name="ICTRXHDRIDX"
+                      precision="9" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[INVENTORYSTATUS]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[INVENTORYSTATUS]"
+                      name="INVENTORYSTATUS" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[SALEAMOUNT]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[SALEAMOUNT]"
+                      name="SALEAMOUNT"
+                      precision="11"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[NEWINVENTORYIDX]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[NEWINVENTORYIDX]"
+                      name="NEWINVENTORYIDX"
+                      precision="9" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[ADDDATE]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[ADDDATE]"
+                      name="ADDDATE" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[EDITDATE]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[EDITDATE]"
+                      name="EDITDATE" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT - Load stage Famous_IC_INVENTORY\DC - AddADFE"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="DC - AddADFE"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DFT - Load stage Famous_IC_INVENTORY\DC - AddADFE.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT - Load stage Famous_IC_INVENTORY\DC - AddADFE.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\DFT - Load stage Famous_IC_INVENTORY\DC - AddADFE.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\DC - AddADFE.Outputs[Derived Column Output].Columns[AddADFExecutionLogId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\DC - AddADFE.Outputs[Derived Column Output].Columns[AddADFExecutionLogId]"
+                      name="AddADFExecutionLogId"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">@[User::intJobLogId]</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">@[User::intJobLogId]</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\DC - AddADFE.Outputs[Derived Column Output].Columns[EditADFExecutionLogId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\DC - AddADFE.Outputs[Derived Column Output].Columns[EditADFExecutionLogId]"
+                      name="EditADFExecutionLogId"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">@[User::intJobLogId]</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">@[User::intJobLogId]</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT - Load stage Famous_IC_INVENTORY\DC - AddADFE.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\DFT - Load stage Famous_IC_INVENTORY\DC - AddADFE.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\DC - AddADFE.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\DC - AddADFE.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\DC - AddADFE.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\DC - AddADFE.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT - Load stage Famous_IC_INVENTORY\DCNV - Change from WSTR to STR"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="DCNV - Change from WSTR to STR"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DFT - Load stage Famous_IC_INVENTORY\DCNV - Change from WSTR to STR.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\DCNV - Change from WSTR to STR.Inputs[Data Conversion Input].Columns[ICPRODTYPE]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="ICPRODTYPE"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[ICPRODTYPE]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\DCNV - Change from WSTR to STR.Inputs[Data Conversion Input].Columns[INVENTORYSTATUS]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="INVENTORYSTATUS"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[INVENTORYSTATUS]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT - Load stage Famous_IC_INVENTORY\DCNV - Change from WSTR to STR.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\DFT - Load stage Famous_IC_INVENTORY\DCNV - Change from WSTR to STR.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\DCNV - Change from WSTR to STR.Outputs[Data Conversion Output].Columns[Copy of ICPRODTYPE]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="1"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\DCNV - Change from WSTR to STR.Outputs[Data Conversion Output].Columns[Copy of ICPRODTYPE]"
+                      name="Copy of ICPRODTYPE"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[ICPRODTYPE]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\DCNV - Change from WSTR to STR.Outputs[Data Conversion Output].Columns[Copy of INVENTORYSTATUS]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="1"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\DCNV - Change from WSTR to STR.Outputs[Data Conversion Output].Columns[Copy of INVENTORYSTATUS]"
+                      name="Copy of INVENTORYSTATUS"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[INVENTORYSTATUS]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT - Load stage Famous_IC_INVENTORY\DCNV - Change from WSTR to STR.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\DFT - Load stage Famous_IC_INVENTORY\DCNV - Change from WSTR to STR.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\DCNV - Change from WSTR to STR.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\DCNV - Change from WSTR to STR.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\DCNV - Change from WSTR to STR.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\DCNV - Change from WSTR to STR.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLEDB_DEST - Stage Famous_IC_INVENTORY"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[stage].[IC_INVENTORY]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Connections[OleDbConnection]"
+                  connectionManagerID="{69FEDE81-C446-4BDC-8F7F-9670CBA903A2}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[FL-HQ-SQLDB01.Sandbox.sa]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].Columns[APPOHDRIDX]"
+                      cachedDataType="numeric"
+                      cachedName="APPOHDRIDX"
+                      cachedPrecision="9"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].ExternalColumns[APPOHDRIDX]"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[APPOHDRIDX]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].Columns[ADDDATE]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ADDDATE"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].ExternalColumns[AddDate]"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[ADDDATE]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].Columns[EDITDATE]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="EDITDATE"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].ExternalColumns[EditDate]"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[EDITDATE]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].Columns[INVENTORYIDX]"
+                      cachedDataType="numeric"
+                      cachedName="INVENTORYIDX"
+                      cachedPrecision="9"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].ExternalColumns[INVENTORYIDX]"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[INVENTORYIDX]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].Columns[TAGIDX]"
+                      cachedDataType="numeric"
+                      cachedName="TAGIDX"
+                      cachedPrecision="9"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].ExternalColumns[TAGIDX]"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[TAGIDX]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].Columns[WAREHOUSEIDX]"
+                      cachedDataType="numeric"
+                      cachedName="WAREHOUSEIDX"
+                      cachedPrecision="5"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].ExternalColumns[WAREHOUSEIDX]"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[WAREHOUSEIDX]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].Columns[PRODUCTIDX]"
+                      cachedDataType="numeric"
+                      cachedName="PRODUCTIDX"
+                      cachedPrecision="9"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].ExternalColumns[PRODUCTIDX]"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[PRODUCTIDX]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].Columns[GABLOCKIDX]"
+                      cachedDataType="numeric"
+                      cachedName="GABLOCKIDX"
+                      cachedPrecision="9"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].ExternalColumns[GABLOCKIDX]"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[GABLOCKIDX]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].Columns[GALOTIDX]"
+                      cachedDataType="numeric"
+                      cachedName="GALOTIDX"
+                      cachedPrecision="9"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].ExternalColumns[GALOTIDX]"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[GALOTIDX]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].Columns[RECEIVEDATE]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="RECEIVEDATE"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].ExternalColumns[RECEIVEDATE]"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[RECEIVEDATE]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].Columns[RECVQNT]"
+                      cachedDataType="numeric"
+                      cachedName="RECVQNT"
+                      cachedPrecision="38"
+                      cachedScale="4"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].ExternalColumns[RECVQNT]"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[RECVQNT]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].Columns[RECVCOST]"
+                      cachedDataType="numeric"
+                      cachedName="RECVCOST"
+                      cachedPrecision="11"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].ExternalColumns[RECVCOST]"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[RECVCOST]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].Columns[ISSUEQNT]"
+                      cachedDataType="wstr"
+                      cachedLength="40"
+                      cachedName="ISSUEQNT"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].ExternalColumns[ISSUEQNT]"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[ISSUEQNT]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].Columns[ISSUECOST]"
+                      cachedDataType="numeric"
+                      cachedName="ISSUECOST"
+                      cachedPrecision="11"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].ExternalColumns[ISSUECOST]"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[ISSUECOST]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].Columns[QUALITYIDX]"
+                      cachedDataType="numeric"
+                      cachedName="QUALITYIDX"
+                      cachedPrecision="5"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].ExternalColumns[QUALITYIDX]"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[QUALITYIDX]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].Columns[CONDITIONIDX]"
+                      cachedDataType="numeric"
+                      cachedName="CONDITIONIDX"
+                      cachedPrecision="5"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].ExternalColumns[CONDITIONIDX]"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[CONDITIONIDX]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].Columns[ICTRXHDRIDX]"
+                      cachedDataType="numeric"
+                      cachedName="ICTRXHDRIDX"
+                      cachedPrecision="9"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].ExternalColumns[ICTRXHDRIDX]"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[ICTRXHDRIDX]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].Columns[SALEAMOUNT]"
+                      cachedDataType="numeric"
+                      cachedName="SALEAMOUNT"
+                      cachedPrecision="11"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].ExternalColumns[SALEAMOUNT]"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[SALEAMOUNT]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].Columns[NEWINVENTORYIDX]"
+                      cachedDataType="numeric"
+                      cachedName="NEWINVENTORYIDX"
+                      cachedPrecision="9"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].ExternalColumns[NEWINVENTORYIDX]"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[NEWINVENTORYIDX]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].Columns[Copy of ICPRODTYPE]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Copy of ICPRODTYPE"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].ExternalColumns[ICPRODTYPE]"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\DCNV - Change from WSTR to STR.Outputs[Data Conversion Output].Columns[Copy of ICPRODTYPE]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].Columns[Copy of INVENTORYSTATUS]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Copy of INVENTORYSTATUS"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].ExternalColumns[INVENTORYSTATUS]"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\DCNV - Change from WSTR to STR.Outputs[Data Conversion Output].Columns[Copy of INVENTORYSTATUS]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].Columns[AddADFExecutionLogId]"
+                      cachedDataType="i4"
+                      cachedName="AddADFExecutionLogId"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].ExternalColumns[AddADFExecutionLogId]"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\DC - AddADFE.Outputs[Derived Column Output].Columns[AddADFExecutionLogId]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].Columns[EditADFExecutionLogId]"
+                      cachedDataType="i4"
+                      cachedName="EditADFExecutionLogId"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].ExternalColumns[EditADFExecutionLogId]"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\DC - AddADFE.Outputs[Derived Column Output].Columns[EditADFExecutionLogId]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].ExternalColumns[APPOHDRIDX]"
+                      dataType="numeric"
+                      name="APPOHDRIDX"
+                      precision="9" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].ExternalColumns[AddDate]"
+                      dataType="dbTimeStamp"
+                      name="AddDate" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].ExternalColumns[EditDate]"
+                      dataType="dbTimeStamp"
+                      name="EditDate" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].ExternalColumns[AddADFExecutionLogId]"
+                      dataType="i4"
+                      name="AddADFExecutionLogId" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].ExternalColumns[EditADFExecutionLogId]"
+                      dataType="i4"
+                      name="EditADFExecutionLogId" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].ExternalColumns[INVENTORYIDX]"
+                      dataType="numeric"
+                      name="INVENTORYIDX"
+                      precision="9" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].ExternalColumns[TAGIDX]"
+                      dataType="numeric"
+                      name="TAGIDX"
+                      precision="9" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].ExternalColumns[WAREHOUSEIDX]"
+                      dataType="numeric"
+                      name="WAREHOUSEIDX"
+                      precision="5" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].ExternalColumns[PRODUCTIDX]"
+                      dataType="numeric"
+                      name="PRODUCTIDX"
+                      precision="9" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].ExternalColumns[GABLOCKIDX]"
+                      dataType="numeric"
+                      name="GABLOCKIDX"
+                      precision="9" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].ExternalColumns[GALOTIDX]"
+                      dataType="numeric"
+                      name="GALOTIDX"
+                      precision="9" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].ExternalColumns[RECEIVEDATE]"
+                      dataType="dbTimeStamp"
+                      name="RECEIVEDATE" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].ExternalColumns[RECVQNT]"
+                      dataType="r8"
+                      name="RECVQNT" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].ExternalColumns[RECVCOST]"
+                      dataType="numeric"
+                      name="RECVCOST"
+                      precision="11" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].ExternalColumns[ISSUEQNT]"
+                      dataType="r8"
+                      name="ISSUEQNT" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].ExternalColumns[ISSUECOST]"
+                      dataType="numeric"
+                      name="ISSUECOST"
+                      precision="11" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].ExternalColumns[QUALITYIDX]"
+                      dataType="numeric"
+                      name="QUALITYIDX"
+                      precision="5" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].ExternalColumns[CONDITIONIDX]"
+                      dataType="numeric"
+                      name="CONDITIONIDX"
+                      precision="5" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].ExternalColumns[ICPRODTYPE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="ICPRODTYPE" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].ExternalColumns[ICTRXHDRIDX]"
+                      dataType="numeric"
+                      name="ICTRXHDRIDX"
+                      precision="9" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].ExternalColumns[INVENTORYSTATUS]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="INVENTORYSTATUS" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].ExternalColumns[SALEAMOUNT]"
+                      dataType="numeric"
+                      name="SALEAMOUNT"
+                      precision="11" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input].ExternalColumns[NEWINVENTORYIDX]"
+                      dataType="numeric"
+                      name="NEWINVENTORYIDX"
+                      precision="9" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DFT - Load stage Famous_IC_INVENTORY.Paths[ADO NET Source Output]"
+              endId="Package\DFT - Load stage Famous_IC_INVENTORY\DC - AddADFE.Inputs[Derived Column Input]"
+              name="ADO NET Source Output"
+              startId="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source.Outputs[ADO NET Source Output]" />
+            <path
+              refId="Package\DFT - Load stage Famous_IC_INVENTORY.Paths[Data Conversion Output]"
+              endId="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY.Inputs[OLE DB Destination Input]"
+              name="Data Conversion Output"
+              startId="Package\DFT - Load stage Famous_IC_INVENTORY\DCNV - Change from WSTR to STR.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\DFT - Load stage Famous_IC_INVENTORY.Paths[Derived Column Output]"
+              endId="Package\DFT - Load stage Famous_IC_INVENTORY\DCNV - Change from WSTR to STR.Inputs[Data Conversion Input]"
+              name="Derived Column Output"
+              startId="Package\DFT - Load stage Famous_IC_INVENTORY\DC - AddADFE.Outputs[Derived Column Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\EXEC - usp_famous_IC_INVENTORY_Load"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{43E3B011-1844-429E-B1A0-430ADA057EFD}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="EXEC - usp_famous_IC_INVENTORY_Load"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{69FEDE81-C446-4BDC-8F7F-9670CBA903A2}"
+          SQLTask:SqlStatementSource="EXEC stage.usp_famous_IC_INVENTORY_Load @JobLogId = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::intJobLogId"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SEQ - Prep Actions"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{EAC9264C-425F-4A98-8D68-050FB40DC0CC}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SEQ - Prep Actions">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\SEQ - Prep Actions\EXEC - Get ETLLogUID"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{C9479B10-EC06-4C32-9953-A34AB68602D6}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="EXEC - Get ETLLogUID"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{3F154544-4BAC-4F55-9FF6-3A5F9A104221}"
+              SQLTask:SqlStatementSource="EXEC dbo.usp_ETLLog_Get @ProcessName = ?, @SubProcessName = ?"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="ETLLogUID"
+                SQLTask:DtsVariableName="User::intETLLogUID" />
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="KeyValue"
+                SQLTask:DtsVariableName="User::bintKeyValue" />
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="DateValue"
+                SQLTask:DtsVariableName="User::dtDateValue" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::strProcessName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="100" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="User::strSubProcessName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="100" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\SEQ - Prep Actions\EXEC - Get JobLogId"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{672AB3D6-3C60-46AE-AB43-3463D6CA3D1E}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="EXEC - Get JobLogId"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="2">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{3F154544-4BAC-4F55-9FF6-3A5F9A104221}"
+              SQLTask:SqlStatementSource="EXEC dbo.usp_JobLog_Insert @ProcessName = ?, @ProcessType = 'SSIS', @ParentJobLogId = ?"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="JobLogId"
+                SQLTask:DtsVariableName="User::intJobLogId" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::strSubProcessName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="100" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="User::intParentJobLogId"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\SEQ - Prep Actions\EXEC - Truncate stage Famous IC_INVENTORY"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{B8BEB97A-F94C-4C0A-951D-0714BD708E88}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="EXEC - Truncate stage Famous IC_INVENTORY"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{69FEDE81-C446-4BDC-8F7F-9670CBA903A2}"
+              SQLTask:SqlStatementSource="TRUNCATE TABLE stage.IC_INVENTORY" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SEQ - Update Execution log Ids"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{DCD56671-B5EE-48FE-851B-90F85981C457}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SEQ - Update Execution log Ids">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\SEQ - Update Execution log Ids\EXEC - usp_ETLLog_Update"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{7D87D1DD-99C8-42EF-ADC9-70B5FC9095BB}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="EXEC - usp_ETLLog_Update"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{3F154544-4BAC-4F55-9FF6-3A5F9A104221}"
+              SQLTask:SqlStatementSource="EXEC dbo.usp_ETLLog_Update @ETLLogUID = ?, @DateValue = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::intETLLogUID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="100" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="$Package::prmParentPackageStart"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="7"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\SEQ - Update Execution log Ids\EXEC - usp_JobLog_Update"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{F74AFEC6-4C9D-41EB-9621-7C597164DF1C}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="EXEC - usp_JobLog_Update"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{3F154544-4BAC-4F55-9FF6-3A5F9A104221}"
+              SQLTask:SqlStatementSource="EXEC dbo.usp_JobLog_Update @JobLogId = ?, @ProcessedStatusId = 1" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::intJobLogId"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="100" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{82FBEECD-7B0A-4FFA-8C52-2EB01C570C5E}"
+      DTS:From="Package\EXEC - usp_famous_IC_INVENTORY_Load"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\SEQ - Update Execution log Ids" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{9766F0A2-E954-4CB8-B27E-0C046A83EAA8}"
+      DTS:From="Package\SEQ - Prep Actions"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\DFT - Load stage Famous_IC_INVENTORY" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{8EFFAE7A-2356-42B8-8E34-1734B9FC0704}"
+      DTS:From="Package\DFT - Load stage Famous_IC_INVENTORY"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\EXEC - usp_famous_IC_INVENTORY_Load" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="294,42"
+          Id="Package\DFT - Load stage Famous_IC_INVENTORY"
+          TopLeft="273.08333334989,204.035714309434" />
+        <NodeLayout
+          Size="296,42"
+          Id="Package\EXEC - usp_famous_IC_INVENTORY_Load"
+          TopLeft="266,314.5" />
+        <NodeLayout
+          Size="197,42"
+          Id="Package\SEQ - Prep Actions\EXEC - Get ETLLogUID"
+          TopLeft="369.5,6.49999999999989" />
+        <NodeLayout
+          Size="184,42"
+          Id="Package\SEQ - Prep Actions\EXEC - Get JobLogId"
+          TopLeft="626.58333334989,5.0357143094344" />
+        <NodeLayout
+          Size="319,42"
+          Id="Package\SEQ - Prep Actions\EXEC - Truncate stage Famous IC_INVENTORY"
+          TopLeft="5.08333334989021,4.57142861886902" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="816,103"
+          Size="816,146"
+          Id="Package\SEQ - Prep Actions"
+          TopLeft="5.50000000000006,7.5" />
+        <NodeLayout
+          Size="222,42"
+          Id="Package\SEQ - Update Execution log Ids\EXEC - usp_ETLLog_Update"
+          TopLeft="5.5,5.5" />
+        <NodeLayout
+          Size="220,42"
+          Id="Package\SEQ - Update Execution log Ids\EXEC - usp_JobLog_Update"
+          TopLeft="288.5,5.5" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="514,103"
+          Size="514,146"
+          Id="Package\SEQ - Update Execution log Ids"
+          TopLeft="154.5,445.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="412.75,356.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,89"
+              Start="0,0"
+              End="0,81.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,81.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="416.791666674945,153.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,50.535714309434"
+              Start="0,0"
+              End="0,43.035714309434">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,43.035714309434" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="417.041666674945,246.035714309434">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,68.464285690566"
+              Start="0,0"
+              End="0,60.964285690566">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,60.964285690566" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\DFT - Load stage Famous_IC_INVENTORY">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="320,42"
+          Id="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY"
+          TopLeft="110.750000049671,360.607142928304" />
+        <NodeLayout
+          Size="208,42"
+          Id="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source"
+          TopLeft="171,68" />
+        <NodeLayout
+          Size="255,42"
+          Id="Package\DFT - Load stage Famous_IC_INVENTORY\DCNV - Change from WSTR to STR"
+          TopLeft="148,261" />
+        <EdgeLayout
+          Id="Package\DFT - Load stage Famous_IC_INVENTORY.Paths[Data Conversion Output]"
+          TopLeft="273.125000024836,303">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,57.607142928304"
+              Start="0,0"
+              End="0,50.107142928304">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,50.107142928304" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="153,42"
+          Id="Package\DFT - Load stage Famous_IC_INVENTORY\DC - AddADFE"
+          TopLeft="195.5,162.5" />
+        <EdgeLayout
+          Id="Package\DFT - Load stage Famous_IC_INVENTORY.Paths[ADO NET Source Output]"
+          TopLeft="273.5,110">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,52.5"
+              Start="0,0"
+              End="0,45">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,45" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT - Load stage Famous_IC_INVENTORY.Paths[Derived Column Output]"
+          TopLeft="273.75,204.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,56.5"
+              Start="0,0"
+              End="0,49">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,49" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Load stage Famous_IC_INVENTORY\OLEDB_DEST - Stage Famous_IC_INVENTORY">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Load stage Famous_IC_INVENTORY\ADO NET Famous Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

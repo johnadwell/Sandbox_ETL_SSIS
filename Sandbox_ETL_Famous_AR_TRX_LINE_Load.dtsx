@@ -1,0 +1,1556 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="3/23/2021 11:41:51 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="FL-HQ-MFS01"
+  DTS:CreatorName="WISHFARMS\jgranat"
+  DTS:DTSID="{2AE9D620-C751-429E-B8F7-6064941C7609}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.123"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="0"
+  DTS:VersionBuild="228"
+  DTS:VersionGUID="{3CE07975-469E-485C-87F5-A9A4FB946CA4}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="3"
+      DTS:DTSID="{DC9F2C14-85C3-471F-8D96-F708424B6B60}"
+      DTS:ObjectName="prmParentJobLogId">
+      <DTS:Property
+        DTS:DataType="3"
+        DTS:Name="ParameterValue">-3</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="7"
+      DTS:DTSID="{BD89334D-A2A7-4EB2-9C4A-AE3F6AFBB99D}"
+      DTS:ObjectName="prmParentPackageStart">
+      <DTS:Property
+        DTS:DataType="7"
+        DTS:Name="ParameterValue">3/23/2021 3:17:00 PM</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{4722F4DF-D719-46B7-BF04-A5336B7AED8C}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="bintKeyValue">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{E410A300-5B3E-4E24-9441-9DDCA3F097C6}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="dtDateValue">
+      <DTS:VariableValue
+        DTS:DataType="7">3/23/2021 2:30:23 PM</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{485B247A-BD8C-4C0C-9631-61CB917A4D65}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="intETLLogUID">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{D85C4A02-1A85-4B97-92AE-A8122C9EECC5}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="intJobLogId">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C54C6DCE-7D37-47F3-8F6B-EF55C9D017C7}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[$Package::prmParentJobLogId]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="intParentJobLogId">
+      <DTS:VariableValue
+        DTS:DataType="3">-3</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{DE0F1F77-AB59-486E-A138-29DFA578B398}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;SELECT APPOHDRIDX,ACCESSGROUPIDX,POTYPE,APPONO,PODATETIME,VENDNAMEIDX,CONTACT,CURRENCYIDX,SALETERMSIDX,APPAYTERMSIDX,COLOCATIONSEQ,SALESPERSONNAMEIDX,CARRIERNAMEIDX,DELIVERYDATE,RECEIVEFLAG,POAMT,STUBDESCR,ORIGINALDELIVERYDATE,PODATETIME AddDate,PODATETIME EditDate&#xA;FROM AP_PO_HEADER h &#xA;INNER JOIN (SELECT hd.APPOHDRIDX, MAX(d.TIMESTAMP) as maxTimeStamp&#xA;                FROM COMPANY_1.AP_PO_HEADER hd&#xA;                    INNER JOIN COMPANY_1.AP_PO_DETAIL d&#xA;                        ON hd.APPOHDRIDX = d.APPOHDRIDX&#xA;                GROUP BY hd.APPOHDRIDX) maxTimeStamp&#xA;        ON h.APPOHDRIDX = maxTimeStamp.APPOHDRIDX&#xA;WHERE PODATETIME &gt;= TO_DATE('11/01/2018','MM/DD/YYYY')&#xA;AND maxTimeStamp.maxTimeStamp &gt;= TO_DATE('&quot; + (dt_str,30,1252) @[User::dtDateValue] + &quot;', 'mm/dd/yyyy HH:MI:SS PM')&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="strFamousSourceQuery">
+      <DTS:VariableValue
+        DTS:DataType="8">SELECT APPOHDRIDX,ACCESSGROUPIDX,POTYPE,APPONO,PODATETIME,VENDNAMEIDX,CONTACT,CURRENCYIDX,SALETERMSIDX,APPAYTERMSIDX,COLOCATIONSEQ,SALESPERSONNAMEIDX,CARRIERNAMEIDX,DELIVERYDATE,RECEIVEFLAG,POAMT,STUBDESCR,ORIGINALDELIVERYDATE,PODATETIME AddDate,PODATETIME EditDate
+FROM AP_PO_HEADER h 
+INNER JOIN (SELECT hd.APPOHDRIDX, MAX(d.TIMESTAMP) as maxTimeStamp
+                FROM COMPANY_1.AP_PO_HEADER hd
+                    INNER JOIN COMPANY_1.AP_PO_DETAIL d
+                        ON hd.APPOHDRIDX = d.APPOHDRIDX
+                GROUP BY hd.APPOHDRIDX) maxTimeStamp
+        ON h.APPOHDRIDX = maxTimeStamp.APPOHDRIDX
+WHERE PODATETIME &gt;= TO_DATE('11/01/2018','MM/DD/YYYY')
+AND maxTimeStamp.maxTimeStamp &gt;= TO_DATE('3/23/2021 2:30:23 PM', 'mm/dd/yyyy HH:MI:SS PM')</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{30708D3D-D4E8-46F6-9FF0-A202160D782C}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="strProcessName">
+      <DTS:VariableValue
+        DTS:DataType="8">Sandbox_ETL</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{38410B9B-7335-41F8-BAC6-35EB856A608C}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="strSubProcessName">
+      <DTS:VariableValue
+        DTS:DataType="8">Sandbox_ETL_Famous_AR_TRX_LINE_Load</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\DFT - Load stage Famous_AR_TRX_LINE"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{86E4F930-039D-4B00-8095-09F700AF1883}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DFT - Load stage Famous_AR_TRX_LINE"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          autoAdjustBufferSize="true"
+          version="1">
+          <components>
+            <component
+              refId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Consumes data from SQL Server, OLE DB, ODBC, or Oracle, using the corresponding .NET Framework data provider. Use a Transact-SQL statement to define the result set. For example, extract data from SQL Server with the .NET Framework data provider for SQL Server.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="Consumes data from SQL Server, OLE DB, ODBC, or Oracle, using the corresponding .NET Framework data provider. Use a Transact-SQL statement to define the result set. For example, extract data from SQL Server with the .NET Framework data provider for SQL Server."
+              name="ADO NET Famous Source"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement used by the component to extract data."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT ARTRXHDRIDX,ARTRXLINESEQ,ARTRXLINETRXTYPE,LINENO,DELETEFLAG,PRODUCTIDX,INVCDESCR,QNT,PRICE,SALEPRICE,SALEAMT,UNITSPERPALLET,NULL AddADFExecutionLogId,NULL EditADFExecutionLogId,sysdate AddDate,sysdate EditDate
+		FROM AR_TRX_LINE tl</property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether to allow non-string external columns to be implicitly converted to strings at the output columns."
+                  name="AllowImplicitStringConversion">true</property>
+                <property
+                  dataType="System.String"
+                  description="The Source database table name."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the mode to retrieve external column information"
+                  name="AccessMode"
+                  typeConverter="Microsoft.SqlServer.Dts.Pipeline.DataReaderSourceAdapter+EnumToStringConverter">2</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.DataReaderSourceAdapter</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Connections[IDbConnection]"
+                  connectionManagerID="{BEE3AF78-6877-4C34-8706-F9FD93C5E78E}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[ADONET.FAMOUS]"
+                  description="Managed connection manager"
+                  name="IDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output]"
+                  name="ADO NET Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[ARTRXHDRIDX]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[ARTRXHDRIDX]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[ARTRXHDRIDX]"
+                      name="ARTRXHDRIDX"
+                      precision="9"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[ARTRXLINESEQ]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[ARTRXLINESEQ]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[ARTRXLINESEQ]"
+                      name="ARTRXLINESEQ"
+                      precision="5"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[ARTRXLINETRXTYPE]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[ARTRXLINETRXTYPE]"
+                      length="1"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[ARTRXLINETRXTYPE]"
+                      name="ARTRXLINETRXTYPE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[LINENO]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[LINENO]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[LINENO]"
+                      name="LINENO"
+                      precision="5"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[DELETEFLAG]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[DELETEFLAG]"
+                      length="1"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[DELETEFLAG]"
+                      name="DELETEFLAG"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[PRODUCTIDX]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[PRODUCTIDX]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[PRODUCTIDX]"
+                      name="PRODUCTIDX"
+                      precision="9"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[INVCDESCR]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[INVCDESCR]"
+                      length="120"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[INVCDESCR]"
+                      name="INVCDESCR"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[QNT]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[QNT]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[QNT]"
+                      name="QNT"
+                      precision="38"
+                      scale="4"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[PRICE]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[PRICE]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[PRICE]"
+                      name="PRICE"
+                      precision="38"
+                      scale="4"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[SALEPRICE]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[SALEPRICE]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[SALEPRICE]"
+                      name="SALEPRICE"
+                      precision="38"
+                      scale="4"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[SALEAMT]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[SALEAMT]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[SALEAMT]"
+                      name="SALEAMT"
+                      precision="11"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[UNITSPERPALLET]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[UNITSPERPALLET]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[UNITSPERPALLET]"
+                      name="UNITSPERPALLET"
+                      precision="7"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[ADDADFEXECUTIONLOGID]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[ADDADFEXECUTIONLOGID]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[ADDADFEXECUTIONLOGID]"
+                      name="ADDADFEXECUTIONLOGID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[EDITADFEXECUTIONLOGID]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[EDITADFEXECUTIONLOGID]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[EDITADFEXECUTIONLOGID]"
+                      name="EDITADFEXECUTIONLOGID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[ADDDATE]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[ADDDATE]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[ADDDATE]"
+                      name="ADDDATE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[EDITDATE]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[EDITDATE]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[EDITDATE]"
+                      name="EDITDATE"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[ARTRXHDRIDX]"
+                      dataType="numeric"
+                      name="ARTRXHDRIDX"
+                      precision="9" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[ARTRXLINESEQ]"
+                      dataType="numeric"
+                      name="ARTRXLINESEQ"
+                      precision="5" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[ARTRXLINETRXTYPE]"
+                      dataType="wstr"
+                      length="1"
+                      name="ARTRXLINETRXTYPE" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[LINENO]"
+                      dataType="numeric"
+                      name="LINENO"
+                      precision="5" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[DELETEFLAG]"
+                      dataType="wstr"
+                      length="1"
+                      name="DELETEFLAG" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[PRODUCTIDX]"
+                      dataType="numeric"
+                      name="PRODUCTIDX"
+                      precision="9" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[INVCDESCR]"
+                      dataType="wstr"
+                      length="120"
+                      name="INVCDESCR" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[QNT]"
+                      dataType="numeric"
+                      name="QNT"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[PRICE]"
+                      dataType="numeric"
+                      name="PRICE"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[SALEPRICE]"
+                      dataType="numeric"
+                      name="SALEPRICE"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[SALEAMT]"
+                      dataType="numeric"
+                      name="SALEAMT"
+                      precision="11"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[UNITSPERPALLET]"
+                      dataType="numeric"
+                      name="UNITSPERPALLET"
+                      precision="7" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[ADDADFEXECUTIONLOGID]"
+                      dataType="nText"
+                      name="ADDADFEXECUTIONLOGID" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[EDITADFEXECUTIONLOGID]"
+                      dataType="nText"
+                      name="EDITADFEXECUTIONLOGID" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[ADDDATE]"
+                      dataType="dbTimeStamp"
+                      name="ADDDATE" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[EDITDATE]"
+                      dataType="dbTimeStamp"
+                      name="EDITDATE" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Error Output]"
+                  isErrorOut="true"
+                  name="ADO NET Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[ARTRXHDRIDX]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[ARTRXHDRIDX]"
+                      name="ARTRXHDRIDX"
+                      precision="9" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[ARTRXLINESEQ]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[ARTRXLINESEQ]"
+                      name="ARTRXLINESEQ"
+                      precision="5" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[ARTRXLINETRXTYPE]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[ARTRXLINETRXTYPE]"
+                      name="ARTRXLINETRXTYPE" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[LINENO]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[LINENO]"
+                      name="LINENO"
+                      precision="5" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[DELETEFLAG]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[DELETEFLAG]"
+                      name="DELETEFLAG" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[PRODUCTIDX]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[PRODUCTIDX]"
+                      name="PRODUCTIDX"
+                      precision="9" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[INVCDESCR]"
+                      dataType="wstr"
+                      length="120"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[INVCDESCR]"
+                      name="INVCDESCR" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[QNT]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[QNT]"
+                      name="QNT"
+                      precision="38"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[PRICE]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[PRICE]"
+                      name="PRICE"
+                      precision="38"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[SALEPRICE]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[SALEPRICE]"
+                      name="SALEPRICE"
+                      precision="38"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[SALEAMT]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[SALEAMT]"
+                      name="SALEAMT"
+                      precision="11"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[UNITSPERPALLET]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[UNITSPERPALLET]"
+                      name="UNITSPERPALLET"
+                      precision="7" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[ADDADFEXECUTIONLOGID]"
+                      dataType="nText"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[ADDADFEXECUTIONLOGID]"
+                      name="ADDADFEXECUTIONLOGID" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[EDITADFEXECUTIONLOGID]"
+                      dataType="nText"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[EDITADFEXECUTIONLOGID]"
+                      name="EDITADFEXECUTIONLOGID" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[ADDDATE]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[ADDDATE]"
+                      name="ADDDATE" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[EDITDATE]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[EDITDATE]"
+                      name="EDITDATE" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT - Load stage Famous_AR_TRX_LINE\DC - AddADFE"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="DC - AddADFE"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DFT - Load stage Famous_AR_TRX_LINE\DC - AddADFE.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT - Load stage Famous_AR_TRX_LINE\DC - AddADFE.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\DFT - Load stage Famous_AR_TRX_LINE\DC - AddADFE.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\DC - AddADFE.Outputs[Derived Column Output].Columns[AddADFExecutionLogId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\DC - AddADFE.Outputs[Derived Column Output].Columns[AddADFExecutionLogId]"
+                      name="AddADFExecutionLogId"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">@[User::intJobLogId]</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">@[User::intJobLogId]</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\DC - AddADFE.Outputs[Derived Column Output].Columns[EditADFExecutionLogId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\DC - AddADFE.Outputs[Derived Column Output].Columns[EditADFExecutionLogId]"
+                      name="EditADFExecutionLogId"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">@[User::intJobLogId]</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">@[User::intJobLogId]</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT - Load stage Famous_AR_TRX_LINE\DC - AddADFE.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\DFT - Load stage Famous_AR_TRX_LINE\DC - AddADFE.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\DC - AddADFE.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\DC - AddADFE.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\DC - AddADFE.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\DC - AddADFE.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT - Load stage Famous_AR_TRX_LINE\DC - Change from WSTR to STR"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="DC - Change from WSTR to STR"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DFT - Load stage Famous_AR_TRX_LINE\DC - Change from WSTR to STR.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\DC - Change from WSTR to STR.Inputs[Data Conversion Input].Columns[ARTRXLINETRXTYPE]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="ARTRXLINETRXTYPE"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[ARTRXLINETRXTYPE]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\DC - Change from WSTR to STR.Inputs[Data Conversion Input].Columns[DELETEFLAG]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="DELETEFLAG"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[DELETEFLAG]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\DC - Change from WSTR to STR.Inputs[Data Conversion Input].Columns[INVCDESCR]"
+                      cachedDataType="wstr"
+                      cachedLength="120"
+                      cachedName="INVCDESCR"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[INVCDESCR]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT - Load stage Famous_AR_TRX_LINE\DC - Change from WSTR to STR.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\DFT - Load stage Famous_AR_TRX_LINE\DC - Change from WSTR to STR.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\DC - Change from WSTR to STR.Outputs[Data Conversion Output].Columns[Copy of ARTRXLINETRXTYPE]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="1"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\DC - Change from WSTR to STR.Outputs[Data Conversion Output].Columns[Copy of ARTRXLINETRXTYPE]"
+                      name="Copy of ARTRXLINETRXTYPE"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[ARTRXLINETRXTYPE]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\DC - Change from WSTR to STR.Outputs[Data Conversion Output].Columns[Copy of DELETEFLAG]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="1"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\DC - Change from WSTR to STR.Outputs[Data Conversion Output].Columns[Copy of DELETEFLAG]"
+                      name="Copy of DELETEFLAG"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[DELETEFLAG]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\DC - Change from WSTR to STR.Outputs[Data Conversion Output].Columns[Copy of INVCDESCR]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="120"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\DC - Change from WSTR to STR.Outputs[Data Conversion Output].Columns[Copy of INVCDESCR]"
+                      name="Copy of INVCDESCR"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[INVCDESCR]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT - Load stage Famous_AR_TRX_LINE\DC - Change from WSTR to STR.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\DFT - Load stage Famous_AR_TRX_LINE\DC - Change from WSTR to STR.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\DC - Change from WSTR to STR.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\DC - Change from WSTR to STR.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\DC - Change from WSTR to STR.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\DC - Change from WSTR to STR.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLEDB_DEST - Stage Famous_AR_TRX_LINE"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[famous].[AR_TRX_LINE]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE.Connections[OleDbConnection]"
+                  connectionManagerID="{69FEDE81-C446-4BDC-8F7F-9670CBA903A2}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[FL-HQ-SQLDB01 Sandbox]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE.Inputs[OLE DB Destination Input].Columns[ADDDATE]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ADDDATE"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE.Inputs[OLE DB Destination Input].ExternalColumns[AddDate]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[ADDDATE]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE.Inputs[OLE DB Destination Input].Columns[EDITDATE]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="EDITDATE"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE.Inputs[OLE DB Destination Input].ExternalColumns[EditDate]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[EDITDATE]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE.Inputs[OLE DB Destination Input].Columns[ARTRXHDRIDX]"
+                      cachedDataType="numeric"
+                      cachedName="ARTRXHDRIDX"
+                      cachedPrecision="9"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE.Inputs[OLE DB Destination Input].ExternalColumns[ARTRXHDRIDX]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[ARTRXHDRIDX]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE.Inputs[OLE DB Destination Input].Columns[ARTRXLINESEQ]"
+                      cachedDataType="numeric"
+                      cachedName="ARTRXLINESEQ"
+                      cachedPrecision="5"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE.Inputs[OLE DB Destination Input].ExternalColumns[ARTRXLINESEQ]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[ARTRXLINESEQ]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE.Inputs[OLE DB Destination Input].Columns[LINENO]"
+                      cachedDataType="numeric"
+                      cachedName="LINENO"
+                      cachedPrecision="5"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE.Inputs[OLE DB Destination Input].ExternalColumns[LINENO]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[LINENO]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE.Inputs[OLE DB Destination Input].Columns[Copy of DELETEFLAG]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Copy of DELETEFLAG"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE.Inputs[OLE DB Destination Input].ExternalColumns[DELETEFLAG]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\DC - Change from WSTR to STR.Outputs[Data Conversion Output].Columns[Copy of DELETEFLAG]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE.Inputs[OLE DB Destination Input].Columns[Copy of ARTRXLINETRXTYPE]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Copy of ARTRXLINETRXTYPE"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE.Inputs[OLE DB Destination Input].ExternalColumns[ARTRXLINETRXTYPE]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\DC - Change from WSTR to STR.Outputs[Data Conversion Output].Columns[Copy of ARTRXLINETRXTYPE]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE.Inputs[OLE DB Destination Input].Columns[PRODUCTIDX]"
+                      cachedDataType="numeric"
+                      cachedName="PRODUCTIDX"
+                      cachedPrecision="9"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE.Inputs[OLE DB Destination Input].ExternalColumns[PRODUCTIDX]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[PRODUCTIDX]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE.Inputs[OLE DB Destination Input].Columns[Copy of INVCDESCR]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="120"
+                      cachedName="Copy of INVCDESCR"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE.Inputs[OLE DB Destination Input].ExternalColumns[INVCDESCR]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\DC - Change from WSTR to STR.Outputs[Data Conversion Output].Columns[Copy of INVCDESCR]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE.Inputs[OLE DB Destination Input].Columns[QNT]"
+                      cachedDataType="numeric"
+                      cachedName="QNT"
+                      cachedPrecision="38"
+                      cachedScale="4"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE.Inputs[OLE DB Destination Input].ExternalColumns[QNT]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[QNT]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE.Inputs[OLE DB Destination Input].Columns[PRICE]"
+                      cachedDataType="numeric"
+                      cachedName="PRICE"
+                      cachedPrecision="38"
+                      cachedScale="4"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE.Inputs[OLE DB Destination Input].ExternalColumns[PRICE]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[PRICE]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE.Inputs[OLE DB Destination Input].Columns[SALEPRICE]"
+                      cachedDataType="numeric"
+                      cachedName="SALEPRICE"
+                      cachedPrecision="38"
+                      cachedScale="4"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE.Inputs[OLE DB Destination Input].ExternalColumns[SALEPRICE]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[SALEPRICE]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE.Inputs[OLE DB Destination Input].Columns[SALEAMT]"
+                      cachedDataType="numeric"
+                      cachedName="SALEAMT"
+                      cachedPrecision="11"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE.Inputs[OLE DB Destination Input].ExternalColumns[SALEAMT]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[SALEAMT]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE.Inputs[OLE DB Destination Input].Columns[UNITSPERPALLET]"
+                      cachedDataType="numeric"
+                      cachedName="UNITSPERPALLET"
+                      cachedPrecision="7"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE.Inputs[OLE DB Destination Input].ExternalColumns[UNITSPERPALLET]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[UNITSPERPALLET]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE.Inputs[OLE DB Destination Input].Columns[AddADFExecutionLogId]"
+                      cachedDataType="i4"
+                      cachedName="AddADFExecutionLogId"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE.Inputs[OLE DB Destination Input].ExternalColumns[AddADFExecutionLogId]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\DC - AddADFE.Outputs[Derived Column Output].Columns[AddADFExecutionLogId]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE.Inputs[OLE DB Destination Input].Columns[EditADFExecutionLogId]"
+                      cachedDataType="i4"
+                      cachedName="EditADFExecutionLogId"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE.Inputs[OLE DB Destination Input].ExternalColumns[EditADFExecutionLogId]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\DC - AddADFE.Outputs[Derived Column Output].Columns[EditADFExecutionLogId]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE.Inputs[OLE DB Destination Input].ExternalColumns[AddDate]"
+                      dataType="dbTimeStamp"
+                      name="AddDate" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE.Inputs[OLE DB Destination Input].ExternalColumns[EditDate]"
+                      dataType="dbTimeStamp"
+                      name="EditDate" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE.Inputs[OLE DB Destination Input].ExternalColumns[AddADFExecutionLogId]"
+                      dataType="i4"
+                      name="AddADFExecutionLogId" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE.Inputs[OLE DB Destination Input].ExternalColumns[EditADFExecutionLogId]"
+                      dataType="i4"
+                      name="EditADFExecutionLogId" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE.Inputs[OLE DB Destination Input].ExternalColumns[ARTRXHDRIDX]"
+                      dataType="numeric"
+                      name="ARTRXHDRIDX"
+                      precision="9" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE.Inputs[OLE DB Destination Input].ExternalColumns[ARTRXLINESEQ]"
+                      dataType="numeric"
+                      name="ARTRXLINESEQ"
+                      precision="5" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE.Inputs[OLE DB Destination Input].ExternalColumns[ARTRXLINETRXTYPE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="ARTRXLINETRXTYPE" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE.Inputs[OLE DB Destination Input].ExternalColumns[LINENO]"
+                      dataType="numeric"
+                      name="LINENO"
+                      precision="5" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE.Inputs[OLE DB Destination Input].ExternalColumns[DELETEFLAG]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="DELETEFLAG" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE.Inputs[OLE DB Destination Input].ExternalColumns[PRODUCTIDX]"
+                      dataType="numeric"
+                      name="PRODUCTIDX"
+                      precision="9" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE.Inputs[OLE DB Destination Input].ExternalColumns[INVCDESCR]"
+                      codePage="1252"
+                      dataType="str"
+                      length="120"
+                      name="INVCDESCR" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE.Inputs[OLE DB Destination Input].ExternalColumns[QNT]"
+                      dataType="r8"
+                      name="QNT" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE.Inputs[OLE DB Destination Input].ExternalColumns[PRICE]"
+                      dataType="r8"
+                      name="PRICE" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE.Inputs[OLE DB Destination Input].ExternalColumns[SALEPRICE]"
+                      dataType="r8"
+                      name="SALEPRICE" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE.Inputs[OLE DB Destination Input].ExternalColumns[SALEAMT]"
+                      dataType="numeric"
+                      name="SALEAMT"
+                      precision="9" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE.Inputs[OLE DB Destination Input].ExternalColumns[UNITSPERPALLET]"
+                      dataType="numeric"
+                      name="UNITSPERPALLET"
+                      precision="4" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DFT - Load stage Famous_AR_TRX_LINE.Paths[ADO NET Source Output]"
+              endId="Package\DFT - Load stage Famous_AR_TRX_LINE\DC - AddADFE.Inputs[Derived Column Input]"
+              name="ADO NET Source Output"
+              startId="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source.Outputs[ADO NET Source Output]" />
+            <path
+              refId="Package\DFT - Load stage Famous_AR_TRX_LINE.Paths[Data Conversion Output]"
+              endId="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE.Inputs[OLE DB Destination Input]"
+              name="Data Conversion Output"
+              startId="Package\DFT - Load stage Famous_AR_TRX_LINE\DC - Change from WSTR to STR.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\DFT - Load stage Famous_AR_TRX_LINE.Paths[Derived Column Output]"
+              endId="Package\DFT - Load stage Famous_AR_TRX_LINE\DC - Change from WSTR to STR.Inputs[Data Conversion Input]"
+              name="Derived Column Output"
+              startId="Package\DFT - Load stage Famous_AR_TRX_LINE\DC - AddADFE.Outputs[Derived Column Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\EXEC - usp_famous_AR_TRX_LINE_Load"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{3F0C881F-9951-4203-8727-FCEBF974F701}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="EXEC - usp_famous_AR_TRX_LINE_Load"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{69FEDE81-C446-4BDC-8F7F-9670CBA903A2}"
+          SQLTask:SqlStatementSource="EXEC stage.usp_famous_AP_PO_HEADER_Load @JobLogId = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::intJobLogId"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SEQ - Prep Actions"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{910AF9D6-A25B-43B0-BA3C-42149EA3DAE6}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SEQ - Prep Actions">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\SEQ - Prep Actions\EXEC - Get ETLLogUID"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{4FD77BCA-C3FC-4B41-8493-063E61DD7DBF}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="EXEC - Get ETLLogUID"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="2">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{3F154544-4BAC-4F55-9FF6-3A5F9A104221}"
+              SQLTask:SqlStatementSource="EXEC dbo.usp_ETLLog_Get @ProcessName = ?, @SubProcessName = ?"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="ETLLogUID"
+                SQLTask:DtsVariableName="User::intETLLogUID" />
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="KeyValue"
+                SQLTask:DtsVariableName="User::bintKeyValue" />
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="DateValue"
+                SQLTask:DtsVariableName="User::dtDateValue" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::strProcessName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="100" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="User::strSubProcessName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="100" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\SEQ - Prep Actions\EXEC - Get JobLogId"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{842F5B9E-247C-4671-ADD3-29AAE8692041}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="EXEC - Get JobLogId"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{3F154544-4BAC-4F55-9FF6-3A5F9A104221}"
+              SQLTask:SqlStatementSource="EXEC dbo.usp_JobLog_Insert @ProcessName = ?, @ProcessType = 'SSIS', @ParentJobLogId = ?"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="JobLogId"
+                SQLTask:DtsVariableName="User::intJobLogId" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::strSubProcessName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="100" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="User::intParentJobLogId"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\SEQ - Prep Actions\EXEC - Truncate stage Famous AR_TRX_LINE"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{BC20DAC8-6F3F-40B4-BFF3-5FDDEF0B0087}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="EXEC - Truncate stage Famous AR_TRX_LINE"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{69FEDE81-C446-4BDC-8F7F-9670CBA903A2}"
+              SQLTask:SqlStatementSource="TRUNCATE TABLE stage.AR_TRX_LINE" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SEQ - Update Execution log Ids"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{53C49B70-B821-46B0-83D0-94241C7FEEA1}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SEQ - Update Execution log Ids">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\SEQ - Update Execution log Ids\EXEC - usp_ETLLog_Update"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{005DDE0A-AB2E-49D4-8592-FA4E1852F774}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="EXEC - usp_ETLLog_Update"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{3F154544-4BAC-4F55-9FF6-3A5F9A104221}"
+              SQLTask:SqlStatementSource="EXEC dbo.usp_ETLLog_Update @ETLLogUID = ?, @DateValue = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::intETLLogUID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="100" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="$Package::prmParentPackageStart"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="7"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\SEQ - Update Execution log Ids\EXEC - usp_JobLog_Update"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{83ED178E-FEDB-4794-B1D9-1A084DF7DF7C}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="EXEC - usp_JobLog_Update"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{3F154544-4BAC-4F55-9FF6-3A5F9A104221}"
+              SQLTask:SqlStatementSource="EXEC dbo.usp_JobLog_Update @JobLogId = ?, @ProcessedStatusId = 1" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::intJobLogId"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="100" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{EDFD7C37-0A0D-4ACE-8EC6-96EBA6EE6F87}"
+      DTS:From="Package\EXEC - usp_famous_AR_TRX_LINE_Load"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\SEQ - Update Execution log Ids" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{CC306296-3D05-41DC-BBD7-62856D5DF2A1}"
+      DTS:From="Package\SEQ - Prep Actions"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\DFT - Load stage Famous_AR_TRX_LINE" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{3DDF05A1-DED6-408F-9379-8F4663C03CF8}"
+      DTS:From="Package\DFT - Load stage Famous_AR_TRX_LINE"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\EXEC - usp_famous_AR_TRX_LINE_Load" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="287,42"
+          Id="Package\DFT - Load stage Famous_AR_TRX_LINE"
+          TopLeft="270.08333334989,203.035714309434" />
+        <NodeLayout
+          Size="289,42"
+          Id="Package\EXEC - usp_famous_AR_TRX_LINE_Load"
+          TopLeft="266,314.5" />
+        <NodeLayout
+          Size="197,42"
+          Id="Package\SEQ - Prep Actions\EXEC - Get ETLLogUID"
+          TopLeft="369.5,6.49999999999989" />
+        <NodeLayout
+          Size="184,42"
+          Id="Package\SEQ - Prep Actions\EXEC - Get JobLogId"
+          TopLeft="626.58333334989,5.0357143094344" />
+        <NodeLayout
+          Size="311,42"
+          Id="Package\SEQ - Prep Actions\EXEC - Truncate stage Famous AR_TRX_LINE"
+          TopLeft="4.08333334989021,6.57142861886902" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="816,103"
+          Size="816,146"
+          Id="Package\SEQ - Prep Actions"
+          TopLeft="5.50000000000006,7.5" />
+        <NodeLayout
+          Size="222,42"
+          Id="Package\SEQ - Update Execution log Ids\EXEC - usp_ETLLog_Update"
+          TopLeft="5.5,5.5" />
+        <NodeLayout
+          Size="220,42"
+          Id="Package\SEQ - Update Execution log Ids\EXEC - usp_JobLog_Update"
+          TopLeft="288.5,5.5" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="514,103"
+          Size="514,146"
+          Id="Package\SEQ - Update Execution log Ids"
+          TopLeft="154.5,445.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="411,356.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,89"
+              Start="0,0"
+              End="0,81.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,81.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="413.541666674945,153.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,49.535714309434"
+              Start="0,0"
+              End="0,42.035714309434">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,42.035714309434" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="412.041666674945,245.035714309434">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,69.464285690566"
+              Start="0,0"
+              End="0,61.964285690566">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,61.964285690566" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\DFT - Load stage Famous_AR_TRX_LINE">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="240,42"
+          Id="Package\DFT - Load stage Famous_AR_TRX_LINE\DC - Change from WSTR to STR"
+          TopLeft="150,217" />
+        <NodeLayout
+          Size="313,42"
+          Id="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE"
+          TopLeft="117.750000049671,314.607142928304" />
+        <NodeLayout
+          Size="208,42"
+          Id="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source"
+          TopLeft="169,68" />
+        <EdgeLayout
+          Id="Package\DFT - Load stage Famous_AR_TRX_LINE.Paths[Data Conversion Output]"
+          TopLeft="272.125000024836,259">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,55.607142928304"
+              Start="0,0"
+              End="0,48.107142928304">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,48.107142928304" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="153,42"
+          Id="Package\DFT - Load stage Famous_AR_TRX_LINE\DC - AddADFE"
+          TopLeft="194,142" />
+        <EdgeLayout
+          Id="Package\DFT - Load stage Famous_AR_TRX_LINE.Paths[ADO NET Source Output]"
+          TopLeft="271.75,110">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,32"
+              Start="0,0"
+              End="0,24.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT - Load stage Famous_AR_TRX_LINE.Paths[Derived Column Output]"
+          TopLeft="270.25,184">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,33"
+              Start="0,0"
+              End="0,25.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Load stage Famous_AR_TRX_LINE\ADO NET Famous Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Load stage Famous_AR_TRX_LINE\OLEDB_DEST - Stage Famous_AR_TRX_LINE">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

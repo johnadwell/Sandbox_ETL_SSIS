@@ -1,0 +1,1967 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="3/23/2021 11:41:51 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="FL-HQ-MFS01"
+  DTS:CreatorName="WISHFARMS\jgranat"
+  DTS:DTSID="{B75DA353-F875-4B3F-BD13-4D4632FFDF49}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.123"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="0"
+  DTS:VersionBuild="233"
+  DTS:VersionGUID="{6A597150-BB0C-4FF9-B024-9797523ECFAA}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="3"
+      DTS:DTSID="{F1642E1B-41FD-495E-BEF0-23848D1B15C3}"
+      DTS:ObjectName="prmParentJobLogId">
+      <DTS:Property
+        DTS:DataType="3"
+        DTS:Name="ParameterValue">-3</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="7"
+      DTS:DTSID="{BE5C50B3-4A00-4800-8ACF-1FC40B61D990}"
+      DTS:ObjectName="prmParentPackageStart">
+      <DTS:Property
+        DTS:DataType="7"
+        DTS:Name="ParameterValue">3/23/2021 3:17:00 PM</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{8ED1B3D4-0F20-42AC-BFA6-1DF3CE34AB79}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="bintKeyValue">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{26FE38C4-724E-4FFE-9B5B-2624317259B4}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="dtDateValue">
+      <DTS:VariableValue
+        DTS:DataType="7">3/23/2021 2:30:23 PM</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{B96D21CC-FAC9-477F-B958-AD9FBE1F94ED}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="intETLLogUID">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A839EEF5-A7B8-4D4A-85BD-4176FD6FD72D}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="intJobLogId">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{67EFCAF6-2553-40C9-8337-7B97F1BEC67E}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[$Package::prmParentJobLogId]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="intParentJobLogId">
+      <DTS:VariableValue
+        DTS:DataType="3">-3</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{6070397D-D014-4570-BB54-EB3B012479FD}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;SELECT ARTRXHDRIDX,SONO,SOSTATUS,HOLDFLAG,SODATETIME,SHIPDATETIME,INVOICEDATE,CUSTNAMEIDX,CUSTPOREF,SALESPERSONNAMEIDX,BROKERNAMEIDX,TOCUSTNAMEIDX,TOCUSTLOCSEQ,TOPRINTADDRESS,SOAMT,ARAMT,RECEIPTAMT,TIMESTAMP,QNT,PALLETS,WEIGHT,GROSSWEIGHT,PROFIT,NULL AddADFExecutionLogId,NULL EditADFExecutionLogId,sysdate AddDate,sysdate EditDate&#xA;&#x9;&#x9;FROM AR_TRX_HEADER th&#xA;WHERE th.HISTDATE &gt;= TO_DATE('&quot; + (dt_str,30,1252) @[User::dtDateValue] + &quot;', 'mm/dd/yyyy HH:MI:SS PM')&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="strFamousSourceQuery">
+      <DTS:VariableValue
+        DTS:DataType="8">SELECT ARTRXHDRIDX,SONO,SOSTATUS,HOLDFLAG,SODATETIME,SHIPDATETIME,INVOICEDATE,CUSTNAMEIDX,CUSTPOREF,SALESPERSONNAMEIDX,BROKERNAMEIDX,TOCUSTNAMEIDX,TOCUSTLOCSEQ,TOPRINTADDRESS,SOAMT,ARAMT,RECEIPTAMT,TIMESTAMP,QNT,PALLETS,WEIGHT,GROSSWEIGHT,PROFIT,NULL AddADFExecutionLogId,NULL EditADFExecutionLogId,sysdate AddDate,sysdate EditDate
+		FROM AR_TRX_HEADER th
+WHERE th.HISTDATE &gt;= TO_DATE('3/23/2021 2:30:23 PM', 'mm/dd/yyyy HH:MI:SS PM')</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{99E31C67-2AD2-406A-9E82-0410DCE3EB0C}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="strProcessName">
+      <DTS:VariableValue
+        DTS:DataType="8">Sandbox_ETL</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{6B3A9BA1-2C11-43CA-959D-C4129E7548B7}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="strSubProcessName">
+      <DTS:VariableValue
+        DTS:DataType="8">Sandbox_ETL_Famous_AR_TRX_HEADER_Load</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\DFT - Load stage Famous_AR_TRX_HEADER"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{C9534733-0C39-4A64-B5E6-F548D16AF736}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DFT - Load stage Famous_AR_TRX_HEADER"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          autoAdjustBufferSize="true"
+          version="1">
+          <components>
+            <component
+              refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Consumes data from SQL Server, OLE DB, ODBC, or Oracle, using the corresponding .NET Framework data provider. Use a Transact-SQL statement to define the result set. For example, extract data from SQL Server with the .NET Framework data provider for SQL Server.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="Consumes data from SQL Server, OLE DB, ODBC, or Oracle, using the corresponding .NET Framework data provider. Use a Transact-SQL statement to define the result set. For example, extract data from SQL Server with the .NET Framework data provider for SQL Server."
+              name="ADO NET Famous Source"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement used by the component to extract data."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT ARTRXHDRIDX,SONO,SOSTATUS,HOLDFLAG,SODATETIME,SHIPDATETIME,INVOICEDATE,CUSTNAMEIDX,CUSTPOREF,SALESPERSONNAMEIDX,BROKERNAMEIDX,TOCUSTNAMEIDX,TOCUSTLOCSEQ,TOPRINTADDRESS,SOAMT,ARAMT,RECEIPTAMT,TIMESTAMP,QNT,PALLETS,WEIGHT,GROSSWEIGHT,PROFIT,NULL AddADFExecutionLogId,NULL EditADFExecutionLogId,sysdate AddDate,sysdate EditDate
+		FROM AR_TRX_HEADER th</property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether to allow non-string external columns to be implicitly converted to strings at the output columns."
+                  name="AllowImplicitStringConversion">true</property>
+                <property
+                  dataType="System.String"
+                  description="The Source database table name."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the mode to retrieve external column information"
+                  name="AccessMode"
+                  typeConverter="Microsoft.SqlServer.Dts.Pipeline.DataReaderSourceAdapter+EnumToStringConverter">2</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.DataReaderSourceAdapter</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Connections[IDbConnection]"
+                  connectionManagerID="{BEE3AF78-6877-4C34-8706-F9FD93C5E78E}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[ADONET.FAMOUS]"
+                  description="Managed connection manager"
+                  name="IDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output]"
+                  name="ADO NET Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[ARTRXHDRIDX]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[ARTRXHDRIDX]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[ARTRXHDRIDX]"
+                      name="ARTRXHDRIDX"
+                      precision="9"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[SONO]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[SONO]"
+                      length="8"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[SONO]"
+                      name="SONO"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[SOSTATUS]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[SOSTATUS]"
+                      length="1"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[SOSTATUS]"
+                      name="SOSTATUS"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[HOLDFLAG]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[HOLDFLAG]"
+                      length="1"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[HOLDFLAG]"
+                      name="HOLDFLAG"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[SODATETIME]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[SODATETIME]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[SODATETIME]"
+                      name="SODATETIME"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[SHIPDATETIME]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[SHIPDATETIME]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[SHIPDATETIME]"
+                      name="SHIPDATETIME"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[INVOICEDATE]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[INVOICEDATE]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[INVOICEDATE]"
+                      name="INVOICEDATE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[CUSTNAMEIDX]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[CUSTNAMEIDX]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[CUSTNAMEIDX]"
+                      name="CUSTNAMEIDX"
+                      precision="9"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[CUSTPOREF]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[CUSTPOREF]"
+                      length="20"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[CUSTPOREF]"
+                      name="CUSTPOREF"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[SALESPERSONNAMEIDX]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[SALESPERSONNAMEIDX]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[SALESPERSONNAMEIDX]"
+                      name="SALESPERSONNAMEIDX"
+                      precision="9"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[BROKERNAMEIDX]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[BROKERNAMEIDX]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[BROKERNAMEIDX]"
+                      name="BROKERNAMEIDX"
+                      precision="9"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[TOCUSTNAMEIDX]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[TOCUSTNAMEIDX]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[TOCUSTNAMEIDX]"
+                      name="TOCUSTNAMEIDX"
+                      precision="9"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[TOCUSTLOCSEQ]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[TOCUSTLOCSEQ]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[TOCUSTLOCSEQ]"
+                      name="TOCUSTLOCSEQ"
+                      precision="5"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[TOPRINTADDRESS]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[TOPRINTADDRESS]"
+                      length="2000"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[TOPRINTADDRESS]"
+                      name="TOPRINTADDRESS"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[SOAMT]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[SOAMT]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[SOAMT]"
+                      name="SOAMT"
+                      precision="11"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[ARAMT]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[ARAMT]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[ARAMT]"
+                      name="ARAMT"
+                      precision="11"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[RECEIPTAMT]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[RECEIPTAMT]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[RECEIPTAMT]"
+                      name="RECEIPTAMT"
+                      precision="11"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[TIMESTAMP]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[TIMESTAMP]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[TIMESTAMP]"
+                      name="TIMESTAMP"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[QNT]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[QNT]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[QNT]"
+                      name="QNT"
+                      precision="38"
+                      scale="4"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[PALLETS]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[PALLETS]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[PALLETS]"
+                      name="PALLETS"
+                      precision="38"
+                      scale="4"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[WEIGHT]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[WEIGHT]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[WEIGHT]"
+                      name="WEIGHT"
+                      precision="38"
+                      scale="4"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[GROSSWEIGHT]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[GROSSWEIGHT]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[GROSSWEIGHT]"
+                      name="GROSSWEIGHT"
+                      precision="38"
+                      scale="4"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[PROFIT]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[PROFIT]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[PROFIT]"
+                      name="PROFIT"
+                      precision="11"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[ADDADFEXECUTIONLOGID]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[ADDADFEXECUTIONLOGID]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[ADDADFEXECUTIONLOGID]"
+                      name="ADDADFEXECUTIONLOGID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[EDITADFEXECUTIONLOGID]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[EDITADFEXECUTIONLOGID]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[EDITADFEXECUTIONLOGID]"
+                      name="EDITADFEXECUTIONLOGID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[ADDDATE]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[ADDDATE]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[ADDDATE]"
+                      name="ADDDATE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[EDITDATE]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[EDITDATE]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[EDITDATE]"
+                      name="EDITDATE"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[ARTRXHDRIDX]"
+                      dataType="numeric"
+                      name="ARTRXHDRIDX"
+                      precision="9" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[SONO]"
+                      dataType="wstr"
+                      length="8"
+                      name="SONO" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[SOSTATUS]"
+                      dataType="wstr"
+                      length="1"
+                      name="SOSTATUS" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[HOLDFLAG]"
+                      dataType="wstr"
+                      length="1"
+                      name="HOLDFLAG" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[SODATETIME]"
+                      dataType="dbTimeStamp"
+                      name="SODATETIME" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[SHIPDATETIME]"
+                      dataType="dbTimeStamp"
+                      name="SHIPDATETIME" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[INVOICEDATE]"
+                      dataType="dbTimeStamp"
+                      name="INVOICEDATE" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[CUSTNAMEIDX]"
+                      dataType="numeric"
+                      name="CUSTNAMEIDX"
+                      precision="9" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[CUSTPOREF]"
+                      dataType="wstr"
+                      length="20"
+                      name="CUSTPOREF" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[SALESPERSONNAMEIDX]"
+                      dataType="numeric"
+                      name="SALESPERSONNAMEIDX"
+                      precision="9" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[BROKERNAMEIDX]"
+                      dataType="numeric"
+                      name="BROKERNAMEIDX"
+                      precision="9" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[TOCUSTNAMEIDX]"
+                      dataType="numeric"
+                      name="TOCUSTNAMEIDX"
+                      precision="9" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[TOCUSTLOCSEQ]"
+                      dataType="numeric"
+                      name="TOCUSTLOCSEQ"
+                      precision="5" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[TOPRINTADDRESS]"
+                      dataType="wstr"
+                      length="2000"
+                      name="TOPRINTADDRESS" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[SOAMT]"
+                      dataType="numeric"
+                      name="SOAMT"
+                      precision="11"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[ARAMT]"
+                      dataType="numeric"
+                      name="ARAMT"
+                      precision="11"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[RECEIPTAMT]"
+                      dataType="numeric"
+                      name="RECEIPTAMT"
+                      precision="11"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[TIMESTAMP]"
+                      dataType="dbTimeStamp"
+                      name="TIMESTAMP" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[QNT]"
+                      dataType="numeric"
+                      name="QNT"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[PALLETS]"
+                      dataType="numeric"
+                      name="PALLETS"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[WEIGHT]"
+                      dataType="numeric"
+                      name="WEIGHT"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[GROSSWEIGHT]"
+                      dataType="numeric"
+                      name="GROSSWEIGHT"
+                      precision="38"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[PROFIT]"
+                      dataType="numeric"
+                      name="PROFIT"
+                      precision="11"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[ADDADFEXECUTIONLOGID]"
+                      dataType="nText"
+                      name="ADDADFEXECUTIONLOGID" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[EDITADFEXECUTIONLOGID]"
+                      dataType="nText"
+                      name="EDITADFEXECUTIONLOGID" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[ADDDATE]"
+                      dataType="dbTimeStamp"
+                      name="ADDDATE" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].ExternalColumns[EDITDATE]"
+                      dataType="dbTimeStamp"
+                      name="EDITDATE" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Error Output]"
+                  isErrorOut="true"
+                  name="ADO NET Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[ARTRXHDRIDX]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[ARTRXHDRIDX]"
+                      name="ARTRXHDRIDX"
+                      precision="9" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[SONO]"
+                      dataType="wstr"
+                      length="8"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[SONO]"
+                      name="SONO" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[SOSTATUS]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[SOSTATUS]"
+                      name="SOSTATUS" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[HOLDFLAG]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[HOLDFLAG]"
+                      name="HOLDFLAG" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[SODATETIME]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[SODATETIME]"
+                      name="SODATETIME" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[SHIPDATETIME]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[SHIPDATETIME]"
+                      name="SHIPDATETIME" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[INVOICEDATE]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[INVOICEDATE]"
+                      name="INVOICEDATE" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[CUSTNAMEIDX]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[CUSTNAMEIDX]"
+                      name="CUSTNAMEIDX"
+                      precision="9" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[CUSTPOREF]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[CUSTPOREF]"
+                      name="CUSTPOREF" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[SALESPERSONNAMEIDX]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[SALESPERSONNAMEIDX]"
+                      name="SALESPERSONNAMEIDX"
+                      precision="9" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[BROKERNAMEIDX]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[BROKERNAMEIDX]"
+                      name="BROKERNAMEIDX"
+                      precision="9" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[TOCUSTNAMEIDX]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[TOCUSTNAMEIDX]"
+                      name="TOCUSTNAMEIDX"
+                      precision="9" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[TOCUSTLOCSEQ]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[TOCUSTLOCSEQ]"
+                      name="TOCUSTLOCSEQ"
+                      precision="5" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[TOPRINTADDRESS]"
+                      dataType="wstr"
+                      length="2000"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[TOPRINTADDRESS]"
+                      name="TOPRINTADDRESS" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[SOAMT]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[SOAMT]"
+                      name="SOAMT"
+                      precision="11"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[ARAMT]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[ARAMT]"
+                      name="ARAMT"
+                      precision="11"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[RECEIPTAMT]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[RECEIPTAMT]"
+                      name="RECEIPTAMT"
+                      precision="11"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[TIMESTAMP]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[TIMESTAMP]"
+                      name="TIMESTAMP" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[QNT]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[QNT]"
+                      name="QNT"
+                      precision="38"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[PALLETS]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[PALLETS]"
+                      name="PALLETS"
+                      precision="38"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[WEIGHT]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[WEIGHT]"
+                      name="WEIGHT"
+                      precision="38"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[GROSSWEIGHT]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[GROSSWEIGHT]"
+                      name="GROSSWEIGHT"
+                      precision="38"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[PROFIT]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[PROFIT]"
+                      name="PROFIT"
+                      precision="11"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[ADDADFEXECUTIONLOGID]"
+                      dataType="nText"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[ADDADFEXECUTIONLOGID]"
+                      name="ADDADFEXECUTIONLOGID" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[EDITADFEXECUTIONLOGID]"
+                      dataType="nText"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[EDITADFEXECUTIONLOGID]"
+                      name="EDITADFEXECUTIONLOGID" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[ADDDATE]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[ADDDATE]"
+                      name="ADDDATE" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[EDITDATE]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[EDITDATE]"
+                      name="EDITDATE" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\DC - AddADFE"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="DC - AddADFE"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\DC - AddADFE.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\DC - AddADFE.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\DFT - Load stage Famous_AR_TRX_HEADER\DC - AddADFE.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\DC - AddADFE.Outputs[Derived Column Output].Columns[AddADFExecutionLogId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\DC - AddADFE.Outputs[Derived Column Output].Columns[AddADFExecutionLogId]"
+                      name="AddADFExecutionLogId"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">@[User::intJobLogId]</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">@[User::intJobLogId]</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\DC - AddADFE.Outputs[Derived Column Output].Columns[EditADFExecutionLogId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\DC - AddADFE.Outputs[Derived Column Output].Columns[EditADFExecutionLogId]"
+                      name="EditADFExecutionLogId"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">@[User::intJobLogId]</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">@[User::intJobLogId]</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\DC - AddADFE.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\DFT - Load stage Famous_AR_TRX_HEADER\DC - AddADFE.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\DC - AddADFE.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\DC - AddADFE.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\DC - AddADFE.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\DC - AddADFE.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\DC - Change from WSTR to STR"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="DC - Change from WSTR to STR"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\DC - Change from WSTR to STR.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\DC - Change from WSTR to STR.Inputs[Data Conversion Input].Columns[SONO]"
+                      cachedDataType="wstr"
+                      cachedLength="8"
+                      cachedName="SONO"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[SONO]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\DC - Change from WSTR to STR.Inputs[Data Conversion Input].Columns[SOSTATUS]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="SOSTATUS"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[SOSTATUS]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\DC - Change from WSTR to STR.Inputs[Data Conversion Input].Columns[HOLDFLAG]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="HOLDFLAG"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[HOLDFLAG]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\DC - Change from WSTR to STR.Inputs[Data Conversion Input].Columns[CUSTPOREF]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="CUSTPOREF"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[CUSTPOREF]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\DC - Change from WSTR to STR.Inputs[Data Conversion Input].Columns[TOPRINTADDRESS]"
+                      cachedDataType="wstr"
+                      cachedLength="2000"
+                      cachedName="TOPRINTADDRESS"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[TOPRINTADDRESS]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\DC - Change from WSTR to STR.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\DFT - Load stage Famous_AR_TRX_HEADER\DC - Change from WSTR to STR.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\DC - Change from WSTR to STR.Outputs[Data Conversion Output].Columns[Copy of SONO]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="8"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\DC - Change from WSTR to STR.Outputs[Data Conversion Output].Columns[Copy of SONO]"
+                      name="Copy of SONO"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[SONO]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\DC - Change from WSTR to STR.Outputs[Data Conversion Output].Columns[Copy of SOSTATUS]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="1"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\DC - Change from WSTR to STR.Outputs[Data Conversion Output].Columns[Copy of SOSTATUS]"
+                      name="Copy of SOSTATUS"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[SOSTATUS]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\DC - Change from WSTR to STR.Outputs[Data Conversion Output].Columns[Copy of HOLDFLAG]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="1"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\DC - Change from WSTR to STR.Outputs[Data Conversion Output].Columns[Copy of HOLDFLAG]"
+                      name="Copy of HOLDFLAG"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[HOLDFLAG]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\DC - Change from WSTR to STR.Outputs[Data Conversion Output].Columns[Copy of CUSTPOREF]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="20"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\DC - Change from WSTR to STR.Outputs[Data Conversion Output].Columns[Copy of CUSTPOREF]"
+                      name="Copy of CUSTPOREF"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[CUSTPOREF]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\DC - Change from WSTR to STR.Outputs[Data Conversion Output].Columns[Copy of TOPRINTADDRESS]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="2000"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\DC - Change from WSTR to STR.Outputs[Data Conversion Output].Columns[Copy of TOPRINTADDRESS]"
+                      name="Copy of TOPRINTADDRESS"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[TOPRINTADDRESS]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\DC - Change from WSTR to STR.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\DFT - Load stage Famous_AR_TRX_HEADER\DC - Change from WSTR to STR.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\DC - Change from WSTR to STR.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\DC - Change from WSTR to STR.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\DC - Change from WSTR to STR.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\DC - Change from WSTR to STR.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLEDB_DEST - Stage Famous_AR_TRX_HEADER"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[famous].[AR_TRX_HEADER]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">true</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Connections[OleDbConnection]"
+                  connectionManagerID="{69FEDE81-C446-4BDC-8F7F-9670CBA903A2}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[FL-HQ-SQLDB01 Sandbox]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].Columns[SALESPERSONNAMEIDX]"
+                      cachedDataType="numeric"
+                      cachedName="SALESPERSONNAMEIDX"
+                      cachedPrecision="9"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].ExternalColumns[SALESPERSONNAMEIDX]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[SALESPERSONNAMEIDX]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].Columns[ADDDATE]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ADDDATE"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].ExternalColumns[AddDate]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[ADDDATE]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].Columns[EDITDATE]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="EDITDATE"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].ExternalColumns[EditDate]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[EDITDATE]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].Columns[Copy of SOSTATUS]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Copy of SOSTATUS"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].ExternalColumns[SOSTATUS]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\DC - Change from WSTR to STR.Outputs[Data Conversion Output].Columns[Copy of SOSTATUS]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].Columns[Copy of HOLDFLAG]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Copy of HOLDFLAG"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].ExternalColumns[HOLDFLAG]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\DC - Change from WSTR to STR.Outputs[Data Conversion Output].Columns[Copy of HOLDFLAG]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].Columns[Copy of CUSTPOREF]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="Copy of CUSTPOREF"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].ExternalColumns[CUSTPOREF]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\DC - Change from WSTR to STR.Outputs[Data Conversion Output].Columns[Copy of CUSTPOREF]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].Columns[ARTRXHDRIDX]"
+                      cachedDataType="numeric"
+                      cachedName="ARTRXHDRIDX"
+                      cachedPrecision="9"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].ExternalColumns[ARTRXHDRIDX]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[ARTRXHDRIDX]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].Columns[Copy of SONO]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="8"
+                      cachedName="Copy of SONO"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].ExternalColumns[SONO]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\DC - Change from WSTR to STR.Outputs[Data Conversion Output].Columns[Copy of SONO]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].Columns[SODATETIME]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="SODATETIME"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].ExternalColumns[SODATETIME]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[SODATETIME]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].Columns[SHIPDATETIME]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="SHIPDATETIME"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].ExternalColumns[SHIPDATETIME]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[SHIPDATETIME]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].Columns[INVOICEDATE]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="INVOICEDATE"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].ExternalColumns[INVOICEDATE]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[INVOICEDATE]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].Columns[CUSTNAMEIDX]"
+                      cachedDataType="numeric"
+                      cachedName="CUSTNAMEIDX"
+                      cachedPrecision="9"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].ExternalColumns[CUSTNAMEIDX]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[CUSTNAMEIDX]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].Columns[BROKERNAMEIDX]"
+                      cachedDataType="numeric"
+                      cachedName="BROKERNAMEIDX"
+                      cachedPrecision="9"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].ExternalColumns[BROKERNAMEIDX]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[BROKERNAMEIDX]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].Columns[TOCUSTNAMEIDX]"
+                      cachedDataType="numeric"
+                      cachedName="TOCUSTNAMEIDX"
+                      cachedPrecision="9"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].ExternalColumns[TOCUSTNAMEIDX]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[TOCUSTNAMEIDX]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].Columns[TOCUSTLOCSEQ]"
+                      cachedDataType="numeric"
+                      cachedName="TOCUSTLOCSEQ"
+                      cachedPrecision="5"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].ExternalColumns[TOCUSTLOCSEQ]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[TOCUSTLOCSEQ]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].Columns[Copy of TOPRINTADDRESS]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2000"
+                      cachedName="Copy of TOPRINTADDRESS"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].ExternalColumns[TOPRINTADDRESS]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\DC - Change from WSTR to STR.Outputs[Data Conversion Output].Columns[Copy of TOPRINTADDRESS]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].Columns[SOAMT]"
+                      cachedDataType="numeric"
+                      cachedName="SOAMT"
+                      cachedPrecision="11"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].ExternalColumns[SOAMT]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[SOAMT]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].Columns[ARAMT]"
+                      cachedDataType="numeric"
+                      cachedName="ARAMT"
+                      cachedPrecision="11"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].ExternalColumns[ARAMT]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[ARAMT]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].Columns[RECEIPTAMT]"
+                      cachedDataType="numeric"
+                      cachedName="RECEIPTAMT"
+                      cachedPrecision="11"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].ExternalColumns[RECEIPTAMT]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[RECEIPTAMT]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].Columns[TIMESTAMP]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="TIMESTAMP"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].ExternalColumns[TIMESTAMP]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[TIMESTAMP]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].Columns[QNT]"
+                      cachedDataType="numeric"
+                      cachedName="QNT"
+                      cachedPrecision="38"
+                      cachedScale="4"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].ExternalColumns[QNT]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[QNT]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].Columns[PALLETS]"
+                      cachedDataType="numeric"
+                      cachedName="PALLETS"
+                      cachedPrecision="38"
+                      cachedScale="4"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].ExternalColumns[PALLETS]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[PALLETS]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].Columns[WEIGHT]"
+                      cachedDataType="numeric"
+                      cachedName="WEIGHT"
+                      cachedPrecision="38"
+                      cachedScale="4"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].ExternalColumns[WEIGHT]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[WEIGHT]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].Columns[GROSSWEIGHT]"
+                      cachedDataType="numeric"
+                      cachedName="GROSSWEIGHT"
+                      cachedPrecision="38"
+                      cachedScale="4"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].ExternalColumns[GROSSWEIGHT]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[GROSSWEIGHT]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].Columns[PROFIT]"
+                      cachedDataType="numeric"
+                      cachedName="PROFIT"
+                      cachedPrecision="11"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].ExternalColumns[PROFIT]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output].Columns[PROFIT]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].Columns[AddADFExecutionLogId]"
+                      cachedDataType="i4"
+                      cachedName="AddADFExecutionLogId"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].ExternalColumns[AddADFExecutionLogId]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\DC - AddADFE.Outputs[Derived Column Output].Columns[AddADFExecutionLogId]" />
+                    <inputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].Columns[EditADFExecutionLogId]"
+                      cachedDataType="i4"
+                      cachedName="EditADFExecutionLogId"
+                      externalMetadataColumnId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].ExternalColumns[EditADFExecutionLogId]"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\DC - AddADFE.Outputs[Derived Column Output].Columns[EditADFExecutionLogId]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].ExternalColumns[SALESPERSONNAMEIDX]"
+                      dataType="numeric"
+                      name="SALESPERSONNAMEIDX"
+                      precision="9" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].ExternalColumns[AddDate]"
+                      dataType="dbTimeStamp"
+                      name="AddDate" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].ExternalColumns[EditDate]"
+                      dataType="dbTimeStamp"
+                      name="EditDate" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].ExternalColumns[AddADFExecutionLogId]"
+                      dataType="i4"
+                      name="AddADFExecutionLogId" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].ExternalColumns[EditADFExecutionLogId]"
+                      dataType="i4"
+                      name="EditADFExecutionLogId" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].ExternalColumns[ARTRXHDRIDX]"
+                      dataType="numeric"
+                      name="ARTRXHDRIDX"
+                      precision="9" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].ExternalColumns[SONO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="8"
+                      name="SONO" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].ExternalColumns[SOSTATUS]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="SOSTATUS" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].ExternalColumns[HOLDFLAG]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="HOLDFLAG" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].ExternalColumns[SODATETIME]"
+                      dataType="dbTimeStamp"
+                      name="SODATETIME" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].ExternalColumns[SHIPDATETIME]"
+                      dataType="dbTimeStamp"
+                      name="SHIPDATETIME" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].ExternalColumns[INVOICEDATE]"
+                      dataType="dbTimeStamp"
+                      name="INVOICEDATE" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].ExternalColumns[CUSTNAMEIDX]"
+                      dataType="numeric"
+                      name="CUSTNAMEIDX"
+                      precision="9" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].ExternalColumns[CUSTPOREF]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="CUSTPOREF" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].ExternalColumns[BROKERNAMEIDX]"
+                      dataType="numeric"
+                      name="BROKERNAMEIDX"
+                      precision="9" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].ExternalColumns[TOCUSTNAMEIDX]"
+                      dataType="numeric"
+                      name="TOCUSTNAMEIDX"
+                      precision="9" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].ExternalColumns[TOCUSTLOCSEQ]"
+                      dataType="numeric"
+                      name="TOCUSTLOCSEQ"
+                      precision="5" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].ExternalColumns[TOPRINTADDRESS]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2000"
+                      name="TOPRINTADDRESS" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].ExternalColumns[SOAMT]"
+                      dataType="numeric"
+                      name="SOAMT"
+                      precision="11" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].ExternalColumns[ARAMT]"
+                      dataType="numeric"
+                      name="ARAMT"
+                      precision="11" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].ExternalColumns[RECEIPTAMT]"
+                      dataType="numeric"
+                      name="RECEIPTAMT"
+                      precision="11" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].ExternalColumns[TIMESTAMP]"
+                      dataType="dbTimeStamp"
+                      name="TIMESTAMP" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].ExternalColumns[QNT]"
+                      dataType="r8"
+                      name="QNT" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].ExternalColumns[PALLETS]"
+                      dataType="r8"
+                      name="PALLETS" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].ExternalColumns[WEIGHT]"
+                      dataType="r8"
+                      name="WEIGHT" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].ExternalColumns[GROSSWEIGHT]"
+                      dataType="r8"
+                      name="GROSSWEIGHT" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input].ExternalColumns[PROFIT]"
+                      dataType="numeric"
+                      name="PROFIT"
+                      precision="11" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DFT - Load stage Famous_AR_TRX_HEADER.Paths[ADO NET Source Output]"
+              endId="Package\DFT - Load stage Famous_AR_TRX_HEADER\DC - AddADFE.Inputs[Derived Column Input]"
+              name="ADO NET Source Output"
+              startId="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source.Outputs[ADO NET Source Output]" />
+            <path
+              refId="Package\DFT - Load stage Famous_AR_TRX_HEADER.Paths[Data Conversion Output]"
+              endId="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER.Inputs[OLE DB Destination Input]"
+              name="Data Conversion Output"
+              startId="Package\DFT - Load stage Famous_AR_TRX_HEADER\DC - Change from WSTR to STR.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\DFT - Load stage Famous_AR_TRX_HEADER.Paths[Derived Column Output]"
+              endId="Package\DFT - Load stage Famous_AR_TRX_HEADER\DC - Change from WSTR to STR.Inputs[Data Conversion Input]"
+              name="Derived Column Output"
+              startId="Package\DFT - Load stage Famous_AR_TRX_HEADER\DC - AddADFE.Outputs[Derived Column Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\EXEC - usp_famous_AR_TRX_HEADER_Load"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{9859A03E-A996-472C-B2BD-35E65FA52E2C}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="EXEC - usp_famous_AR_TRX_HEADER_Load"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{69FEDE81-C446-4BDC-8F7F-9670CBA903A2}"
+          SQLTask:SqlStatementSource="EXEC stage.usp_famous_AR_TRX_HEADER_Load @JobLogId = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::intJobLogId"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SEQ - Prep Actions"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{165EF00C-3D56-44FF-A47B-AE035E9E1BB5}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SEQ - Prep Actions">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\SEQ - Prep Actions\EXEC - Get ETLLogUID"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{2C6AC278-29DC-48F2-9CD5-F4116416F94F}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="EXEC - Get ETLLogUID"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{3F154544-4BAC-4F55-9FF6-3A5F9A104221}"
+              SQLTask:SqlStatementSource="EXEC dbo.usp_ETLLog_Get @ProcessName = ?, @SubProcessName = ?"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="ETLLogUID"
+                SQLTask:DtsVariableName="User::intETLLogUID" />
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="KeyValue"
+                SQLTask:DtsVariableName="User::bintKeyValue" />
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="DateValue"
+                SQLTask:DtsVariableName="User::dtDateValue" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::strProcessName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="100" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="User::strSubProcessName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="100" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\SEQ - Prep Actions\EXEC - Get JobLogId"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{54069B9E-499A-4D53-A213-8B4F7ECB88A6}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="EXEC - Get JobLogId"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{3F154544-4BAC-4F55-9FF6-3A5F9A104221}"
+              SQLTask:SqlStatementSource="EXEC dbo.usp_JobLog_Insert @ProcessName = ?, @ProcessType = 'SSIS', @ParentJobLogId = ?"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="JobLogId"
+                SQLTask:DtsVariableName="User::intJobLogId" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::strSubProcessName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="100" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="User::intParentJobLogId"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\SEQ - Prep Actions\EXEC - Truncate stage Famous AR_TRX_HEADER"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{055B5EEE-6FA7-464B-B3C7-93C5A8A4CA74}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="EXEC - Truncate stage Famous AR_TRX_HEADER"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="2">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{69FEDE81-C446-4BDC-8F7F-9670CBA903A2}"
+              SQLTask:SqlStatementSource="TRUNCATE TABLE stage.AR_TRX_HEADER" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SEQ - Update Execution log Ids"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{7E660D3B-5551-43C8-860F-4B37DCAAED37}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SEQ - Update Execution log Ids">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\SEQ - Update Execution log Ids\EXEC - usp_ETLLog_Update"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{E1B90888-4CA1-47A6-9340-2AC79A0B6EED}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="EXEC - usp_ETLLog_Update"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{3F154544-4BAC-4F55-9FF6-3A5F9A104221}"
+              SQLTask:SqlStatementSource="EXEC dbo.usp_ETLLog_Update @ETLLogUID = ?, @DateValue = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::intETLLogUID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="100" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="$Package::prmParentPackageStart"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="7"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\SEQ - Update Execution log Ids\EXEC - usp_JobLog_Update"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{B15547B4-56DE-42FA-8CEB-E9E55633ACAA}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="EXEC - usp_JobLog_Update"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{3F154544-4BAC-4F55-9FF6-3A5F9A104221}"
+              SQLTask:SqlStatementSource="EXEC dbo.usp_JobLog_Update @JobLogId = ?, @ProcessedStatusId = 1" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::intJobLogId"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="100" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{25AE414B-0373-45CD-BD39-E8E041F981DF}"
+      DTS:From="Package\EXEC - usp_famous_AR_TRX_HEADER_Load"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\SEQ - Update Execution log Ids" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{99C4C3CF-66DE-4DEA-A18F-2EDAF93552F2}"
+      DTS:From="Package\SEQ - Prep Actions"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\DFT - Load stage Famous_AR_TRX_HEADER" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{E996B00C-B810-45E8-A58F-8862C14BC9DE}"
+      DTS:From="Package\DFT - Load stage Famous_AR_TRX_HEADER"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\EXEC - usp_famous_AR_TRX_HEADER_Load" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="308,42"
+          Id="Package\DFT - Load stage Famous_AR_TRX_HEADER"
+          TopLeft="264.08333334989,204.035714309434" />
+        <NodeLayout
+          Size="310,42"
+          Id="Package\EXEC - usp_famous_AR_TRX_HEADER_Load"
+          TopLeft="262,313.5" />
+        <NodeLayout
+          Size="197,42"
+          Id="Package\SEQ - Prep Actions\EXEC - Get ETLLogUID"
+          TopLeft="369.5,6.49999999999989" />
+        <NodeLayout
+          Size="184,42"
+          Id="Package\SEQ - Prep Actions\EXEC - Get JobLogId"
+          TopLeft="626.58333334989,5.0357143094344" />
+        <NodeLayout
+          Size="333,42"
+          Id="Package\SEQ - Prep Actions\EXEC - Truncate stage Famous AR_TRX_HEADER"
+          TopLeft="5.08333334989021,4.57142861886902" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="816,103"
+          Size="816,146"
+          Id="Package\SEQ - Prep Actions"
+          TopLeft="5.50000000000006,7.5" />
+        <NodeLayout
+          Size="222,42"
+          Id="Package\SEQ - Update Execution log Ids\EXEC - usp_ETLLog_Update"
+          TopLeft="5.5,5.5" />
+        <NodeLayout
+          Size="220,42"
+          Id="Package\SEQ - Update Execution log Ids\EXEC - usp_JobLog_Update"
+          TopLeft="288.5,5.5" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="514,103"
+          Size="514,146"
+          Id="Package\SEQ - Update Execution log Ids"
+          TopLeft="154.5,445.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="414.25,355.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,90"
+              Start="0,0"
+              End="0,82.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,82.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="415.791666674945,153.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,50.535714309434"
+              Start="0,0"
+              End="0,43.035714309434">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,43.035714309434" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="417.541666674945,246.035714309434">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,67.464285690566"
+              Start="0,0"
+              End="0,59.964285690566">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,59.964285690566" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\DFT - Load stage Famous_AR_TRX_HEADER">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="240,42"
+          Id="Package\DFT - Load stage Famous_AR_TRX_HEADER\DC - Change from WSTR to STR"
+          TopLeft="150,218" />
+        <NodeLayout
+          Size="208,42"
+          Id="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source"
+          TopLeft="171,68" />
+        <NodeLayout
+          Size="334,42"
+          Id="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER"
+          TopLeft="107.750000049671,308.607142928304" />
+        <EdgeLayout
+          Id="Package\DFT - Load stage Famous_AR_TRX_HEADER.Paths[Data Conversion Output]"
+          TopLeft="272.375000024836,260">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,48.607142928304"
+              Start="0,0"
+              End="0,41.107142928304">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,41.107142928304" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="153,42"
+          Id="Package\DFT - Load stage Famous_AR_TRX_HEADER\DC - AddADFE"
+          TopLeft="192,138" />
+        <EdgeLayout
+          Id="Package\DFT - Load stage Famous_AR_TRX_HEADER.Paths[ADO NET Source Output]"
+          TopLeft="271.75,110">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,28"
+              Start="0,0"
+              End="0,20.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT - Load stage Famous_AR_TRX_HEADER.Paths[Derived Column Output]"
+          TopLeft="269.25,180">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,38"
+              Start="0,0"
+              End="0,30.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Load stage Famous_AR_TRX_HEADER\ADO NET Famous Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Load stage Famous_AR_TRX_HEADER\OLEDB_DEST - Stage Famous_AR_TRX_HEADER">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
